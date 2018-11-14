@@ -101,23 +101,24 @@ class HMM:
         # Based on the algorithm on page R-4 in handout
         mu_t = [1]
         prev_word = '###'
-        back_t = []
+        back_t = ['']
 
         true_tags = []
 
-        # TODO: handle start and end states
-        # also handle multiple sentences (now, only handles first sentence)
         with open(test_file, 'r') as f:
-            # TODO: handle SOS
             f.readline()
 
-            for i, line in enumerate(f):
+            for line_no, line in enumerate(f):
+                i = line_no + 1
                 w_i, tag = line.strip().split('/')
                 true_tags.append(tag)
     
                 # TODO: handle EOS
                 if w_i == "###":
-                    break
+                    back_t.append("###")
+                    mu_t.append(1)
+                    prev_word = "###"
+                    continue
                 
                 tags = self.tag_dict[w_i]
                 if prev_word == '###':
@@ -138,18 +139,30 @@ class HMM:
                             back_t[i] = t_im1
 
                 prev_word = w_i  
-
+            
+            '''
             # go through backpointers, recover most likely tags
-            pred_tags = ['###']
-            for i in range(len(back_t)-1, 1, -1):
+            pred_tags = []
+            for i in range(len(back_t)-1, -1, -1):
                 pred_tags.append(back_t[i])
-
+            
             # reverse array to get sequence of tags in sentence order
             pred_tags = pred_tags[::-1]
+            '''
+            del back_t[0]
+
+            # compare and evaluate
+            correct = 0
+            total = 0
+            for i in range(0, len(true_tags)):
+                if true_tags[i] == back_t[i] and true_tags != "###":
+                    correct += 1
+                    total += 1
+                elif true_tags != "###":
+                    total += 1
             
-            # compare
-            # TODO: implement accuracy metrics (and time?)
-            print("predicted tags: {}\nlength: {}".format(pred_tags, len(pred_tags)))
+            print("accuracy: {}".format(float(correct) / total))
+            print("predicted tags: {}\nlength: {}".format(back_t, len(back_t)))
             print("true tags: {}\nlength: {}".format(true_tags, len(true_tags)))     
     
 
