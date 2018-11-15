@@ -150,8 +150,6 @@ class HMM:
                     prev_tags = self.tag_dict[prev_word]
                 
                 # initialize mu_t[i] and back_t[i]
-
-
                 for t_i in tags:
                     if t_i not in back_t.keys():
                         back_t[t_i] = ['###']
