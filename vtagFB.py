@@ -107,9 +107,9 @@ class HMM:
                     self.emission_probs[tag][word] = \
                             float(emission_counts[tag][word]) / emission_sum
 
-        print("transition probabilities:", self.transition_probs)
+        #print("transition probabilities:", self.transition_probs)
 
-        print("emission probabilities:", self.emission_probs)
+        #print("emission probabilities:", self.emission_probs)
         print()
         
 
@@ -155,6 +155,9 @@ class HMM:
                 state_p[t_i].append(float('-inf'))
 
             for t_im1 in prev_tags:
+
+                #trans_p = math.log(self.transition_probs[t_im1][t_i])
+                #emiss_p = math.log(self.emission_probs[t_i][w_i])
 
                 p = math.log(self.transition_probs[t_im1][t_i]) + \
                     math.log(self.emission_probs[t_i][w_i])
@@ -202,6 +205,7 @@ class HMM:
         # Similar to back_t in viterbi
         predicted_tags = []
         true_tags = []
+        words = []
 
         perplexity = 0
 
@@ -212,14 +216,17 @@ class HMM:
         for i in range(len(testlines)):
             line = testlines[i]
             w_i, tag = line.strip().split('/')
+
+            words.append(w_i)
             true_tags.append(tag)
+
             if i > 0:
                 perplexity += math.log(self.transition_probs[true_tags[i-1]][true_tags[i]]) \
                         + math.log(self.emission_probs[tag][w_i])
 
             self.calc_state_probs(i, w_i, prev_word, direction="forward")
             prev_word = w_i
-        print(perplexity)
+
 
         # backward pass
         #   note beta_t is reversed indexed in order to reuse the way initialisation works 
@@ -233,7 +240,7 @@ class HMM:
             w_i, tag = line.strip().split('/')
             self.calc_state_probs(i, w_i, prev_word, direction="backward")
             prev_word = w_i
-
+            
             predicted_tags.append(self.get_max_tag(i, w_i))
 
         # Sanity check
@@ -263,6 +270,14 @@ class HMM:
         perplexity = math.exp( - perplexity / (len(testlines)-1))
         print("perplexity:", perplexity)
 
+
+        output = []
+        for i in range(len(test_file)):
+            output.append("{}\{}".format(words[i], predicted_tags[i]))
+
+        with open('test-output', 'w') as f:
+            output.append("###\###")
+            f.write("\n".join(output))
 
 
 # run Hidden Markov Model on specified training and testing files
