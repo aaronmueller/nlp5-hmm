@@ -203,19 +203,23 @@ class HMM:
         predicted_tags = []
         true_tags = []
 
+        perplexity = 0
+
         with open(test_file, 'r') as f:
             testlines = f.readlines()
-
 
         # forward pass
         for i in range(len(testlines)):
             line = testlines[i]
             w_i, tag = line.strip().split('/')
             true_tags.append(tag)
+            if i > 0:
+                perplexity += math.log(self.transition_probs[true_tags[i-1]][true_tags[i]]) \
+                        + math.log(self.emission_probs[tag][w_i])
 
             self.calc_state_probs(i, w_i, prev_word, direction="forward")
             prev_word = w_i
-        
+        print(perplexity)
 
         # backward pass
         #   note beta_t is reversed indexed in order to reuse the way initialisation works 
@@ -256,7 +260,7 @@ class HMM:
         # length -2 because of ###/### at the beginning and end of file
         # 
         # self.alpha_t['###'] should contain the sum of alpha_t
-        perplexity = math.exp( - self.alpha_t['###'][-1] / (len(testlines)-2))
+        perplexity = math.exp( - perplexity / (len(testlines)-1))
         print("perplexity:", perplexity)
 
 
