@@ -36,8 +36,17 @@ class HMM:
             
             SOS = False
 
+            lamda = 1
+            self.observations.add('<OOV>')
+            self.tag_dict['<OOV>'] = set()
+
             for line_no, line in enumerate(f):
                 word, tag = line.strip().split('/')
+
+                if word not in self.observations:
+                    self.observations.add(word)
+                if tag not in self.states:
+                    self.states.add(tag)
 
                 if word == "###":
                     SOS = True
@@ -59,13 +68,14 @@ class HMM:
                     num_sentences += 1
                     SOS = False
                 
+
                 # Unsmoothed version. If tag has not been seen in training set will assign
                 # 0 prob
                 if word not in self.tag_dict.keys():
                     # self.tag_dict[word] = ['H', 'C']
-                    self.tag_dict[word] = []
+                    self.tag_dict[word] = set()
                 if tag not in self.tag_dict[word]:
-                    self.tag_dict[word].append(tag)
+                    self.tag_dict[word].add(tag)
                 
                 if prev_tag not in transition_counts:
                     transition_counts[prev_tag] = defaultdict(int)
@@ -85,11 +95,16 @@ class HMM:
             for prev_tag in transition_counts:
                 self.transition_probs[prev_tag] = {}
                 transition_sum = sum(transition_counts[prev_tag].values())
-
-                for tag in transition_counts[prev_tag]:
-
-                    self.transition_probs[prev_tag][tag] = \
-                            float(transition_counts[prev_tag][tag]) / transition_sum
+                
+                # add-lambda smoothing
+                for tag in self.states:
+                    if tag in transition_counts[prev_tag]:
+                        self.transition_probs[prev_tag][tag] = \
+                                float(transition_counts[prev_tag][tag] + lamda) / \
+                                (transition_sum + (lamda * len(self.states)))
+                    else:
+                        self.transition_probs[prev_tag][tag] = \
+                                lamda / (transition_sum + lamda * len(self.states))
             
             
             #for word in emission_counts:
@@ -103,13 +118,22 @@ class HMM:
             for tag in emission_counts:
                 self.emission_probs[tag] = {}
                 emission_sum = sum(emission_counts[tag].values())
-                for word in emission_counts[tag]:
-                    self.emission_probs[tag][word] = \
-                            float(emission_counts[tag][word]) / emission_sum
 
-        #print("transition probabilities:", self.transition_probs)
+                # add-lambda smoothing
+                for word in self.observations:
+                    if word in emission_counts[tag]:
+                        self.emission_probs[tag][word] = \
+                                float(emission_counts[tag][word] + lamda) / \
+                                (emission_sum + (lamda * len(self.observations)))
+                    else:
+                        self.emission_probs[tag][word] = \
+                                lamda / (emission_sum + (lamda * len(self.observations)))
 
-        #print("emission probabilities:", self.emission_probs)
+        self.tag_dict['<OOV>'].update(self.states)
+        self.tag_dict['<OOV>'].difference_update({'###'})
+        # print("transition probabilities:", self.transition_probs)
+
+        # print("emission probabilities:", self.emission_probs)
         print()
         
 
@@ -138,7 +162,7 @@ class HMM:
         
         # First word
         elif prev_word == '###':
-            tags = self.start_probs.keys()
+            tags = self.tag_dict[w_i]
             prev_tags = {'###'} # ### tags ###
 
         else:
@@ -155,13 +179,10 @@ class HMM:
                 state_p[t_i].append(float('-inf'))
 
             for t_im1 in prev_tags:
-
-                #trans_p = math.log(self.transition_probs[t_im1][t_i])
-                #emiss_p = math.log(self.emission_probs[t_i][w_i])
-
                 p = math.log(self.transition_probs[t_im1][t_i]) + \
                     math.log(self.emission_probs[t_i][w_i])
-
+                
+                    #pdb.set_trace()
                 mu = state_p[t_im1][i-1] + p
 
                 # Cannot just add log probs here. 
@@ -178,6 +199,7 @@ class HMM:
         max_tag = None
 
         for tag in self.tag_dict[w_i]:
+            print(w_i, tag, len(self.alpha_t[tag]), len(self.beta_t[tag]))
             predicted_tag_score = self.alpha_t[tag][-i] + self.beta_t[tag][i]
             
             # Line 13 of pseudocode normalises but there is no need to normalise since we are
@@ -207,11 +229,12 @@ class HMM:
         true_tags = []
         words = []
 
-        perplexity = 0
+        crossentropy = 0
 
         with open(test_file, 'r') as f:
             testlines = f.readlines()
-
+        
+        known = [True] * len(testlines)
         # forward pass
         for i in range(len(testlines)):
             line = testlines[i]
@@ -220,24 +243,34 @@ class HMM:
             words.append(w_i)
             true_tags.append(tag)
 
+            if w_i not in self.observations:
+                w_i = '<OOV>'
+                known[i] = False
+
             if i > 0:
-                perplexity += math.log(self.transition_probs[true_tags[i-1]][true_tags[i]]) \
+                crossentropy += math.log(self.transition_probs[true_tags[i-1]][true_tags[i]]) \
                         + math.log(self.emission_probs[tag][w_i])
 
             self.calc_state_probs(i, w_i, prev_word, direction="forward")
             prev_word = w_i
 
 
+       
         # backward pass
         #   note beta_t is reversed indexed in order to reuse the way initialisation works 
         #   i.e., beta_t[0] is the state of the last observed word.
         #   hence predicted_tags is reversed indexed as well.
 
         prev_word = ''
+        self.mu_t = {}
+        self.back_t = {}
         for i in range(len(testlines)):
 
             line = testlines[len(testlines)-1-i]
             w_i, tag = line.strip().split('/')
+            if w_i not in self.observations:
+                w_i = '<OOV>'
+
             self.calc_state_probs(i, w_i, prev_word, direction="backward")
             prev_word = w_i
             
@@ -250,24 +283,41 @@ class HMM:
         # compare and evaluate
         correct = 0
         total = 0
+        known_total = 0
+        known_correct = 0
+        unknown_correct = 0
         tags = predicted_tags[::-1]
 
         for i in range(0, len(true_tags)):
             if true_tags[i] == tags[i] and true_tags[i] != "###":
                 correct += 1
                 total += 1
+                if known[i] == True:
+                    known_total += 1
+                    known_correct += 1
+                else:
+                    unknown_correct += 1
             elif true_tags[i] != "###":
                 total += 1
+                if known[i] == True:
+                    known_total += 1
         
+        unknown_total = total - known_total
         print("accuracy: {}".format(float(correct) / total))
-        print("predicted tags: {}\nlength: {}".format(tags, len(tags)))
-        print("true tags: {}\nlength: {}".format(true_tags, len(true_tags)))     
+        print("known accuracy: {}".format(float(known_correct) / known_total))
+        if unknown_total > 0:
+            print("unknown accuracy: {}".format(float(unknown_correct) / unknown_total))
+        #print("predicted tags: {}\nlength: {}".format(tags, len(tags)))
+        for i in range(10):
+            print(tags[-i], end=" ")
+            print(true_tags[-i])
+        #print("true tags: {}\nlength: {}".format(true_tags, len(true_tags)))     
 
         # Calculate perplexity at the end of forwardpass
-        # length -2 because of ###/### at the beginning and end of file
+        # length -1 because of ###/### at SOS
         # 
         # self.alpha_t['###'] should contain the sum of alpha_t
-        perplexity = math.exp( - perplexity / (len(testlines)-1))
+        perplexity = math.exp( - crossentropy / (len(testlines)-1))
         print("perplexity:", perplexity)
 
 
