@@ -10,6 +10,7 @@ import sys
 import numpy as np
 import pdb
 from collections import defaultdict
+from collections import Counter
 import math
 
 NUM_SET = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'}
@@ -18,6 +19,7 @@ class HMM:
     def __init__(self):
         self.states = set()
         self.observations = set()
+
         self.start_probs = {}
         self.transition_probs = {}
         self.emission_probs = {}
@@ -27,16 +29,19 @@ class HMM:
         self.mu_t = {}
         self.back_t = {}
 
+
+        self.sfx_observations = set()
+        self.sfx_emission_probs = {}
+        self.sfx_tag_dict = {}
+
     # fill variables declared in __init__
-<<<<<<< Updated upstream
-=======
 
     def get_suffix(self, word):
         #
         # uncomment "return word" below to remove the effect of suffix
         #
         
-        # return word
+        #return word
 
         # -4 is the best length so far
         # from 92.65% to 93.59%
@@ -74,7 +79,6 @@ class HMM:
                     probs[index1][index2] = \
                         lamda/ (normalising_sum + lamda * len(vals))
 
->>>>>>> Stashed changes
     def train(self, train_file):
         with open(train_file, 'r') as f:
             start_counts = defaultdict(int)
@@ -82,28 +86,28 @@ class HMM:
             num_words = 0
             transition_counts = {}
             emission_counts = {}
+            sfx_emission_counts = {}
             state_counts = defaultdict(int)
             
             SOS = False
 
             lamda = 1
-            self.observations.add('<OOV>')
             self.observations.add('<NUM>')
+            self.observations.add('<OOV>')
             self.tag_dict['<OOV>'] = set()
 
             for line_no, line in enumerate(f):
                 word, tag = line.strip().split('/')
-<<<<<<< Updated upstream
-=======
-
+                
                 if word[0] in NUM_SET and word[-1] in NUM_SET:
                     word = '<NUM>'
-                
+
                 sfx = self.get_suffix(word)
->>>>>>> Stashed changes
 
                 if word not in self.observations:
                     self.observations.add(word)
+                    self.sfx_observations.add(sfx)
+
                 if tag not in self.states:
                     self.states.add(tag)
 
@@ -111,13 +115,11 @@ class HMM:
                     SOS = True
                     # handle EOS
                     if line_no != 0:
-                        if prev_tag not in transition_counts:
-                            transition_counts[prev_tag] = defaultdict(int)
-                        transition_counts[prev_tag][tag] += 1
                         
-                        if tag not in emission_counts:
-                            emission_counts[tag] = defaultdict(int)
-                        emission_counts[tag][word] += 1
+                        transition_counts = self.add_count(prev_tag, tag, transition_counts)
+                        #emission_counts = self.add_count(word, tag, emission_counts)
+                        emission_counts = self.add_count(tag,word, emission_counts)
+                        sfx_emission_counts = self.add_count(tag, sfx, sfx_emission_counts)
 
                     prev_tag = "###"
                     continue
@@ -129,21 +131,18 @@ class HMM:
                
                 state_counts[tag] += 1
 
-                # Unsmoothed version. If tag has not been seen in training set will assign
-                # 0 prob
                 if word not in self.tag_dict.keys():
-                    # self.tag_dict[word] = ['H', 'C']
                     self.tag_dict[word] = set()
-                if tag not in self.tag_dict[word]:
-                    self.tag_dict[word].add(tag)
-                
-                if prev_tag not in transition_counts:
-                    transition_counts[prev_tag] = defaultdict(int)
-                transition_counts[prev_tag][tag] += 1
 
-                if tag not in emission_counts:
-                    emission_counts[tag] = defaultdict(int)
-                emission_counts[tag][word] += 1
+                self.tag_dict[word].add(tag)
+
+                if sfx not in self.sfx_tag_dict.keys():
+                    self.sfx_tag_dict[sfx] = set()
+                self.sfx_tag_dict[sfx].add(tag)
+
+                transition_counts = self.add_count(prev_tag, tag, transition_counts)             
+                emission_counts = self.add_count(tag, word, emission_counts)
+                sfx_emission_counts = self.add_count(tag, sfx, sfx_emission_counts)
 
                 num_words += 1
                 prev_tag = tag
@@ -152,44 +151,6 @@ class HMM:
             for tag in start_counts.keys():
                 self.start_probs[tag] = float(start_counts[tag]) / num_sentences
 
-<<<<<<< Updated upstream
-            for prev_tag in transition_counts:
-                self.transition_probs[prev_tag] = {}
-                transition_sum = sum(transition_counts[prev_tag].values())
-                
-                # add-lambda smoothing
-                for tag in self.states:
-                    if tag in transition_counts[prev_tag]:
-                        self.transition_probs[prev_tag][tag] = \
-                                float(transition_counts[prev_tag][tag] + lamda) / \
-                                (transition_sum + (lamda * len(self.states)))
-                    else:
-                        self.transition_probs[prev_tag][tag] = \
-                                lamda / (transition_sum + lamda * len(self.states))
-
-            #for word in emission_counts:
-            #    self.emission_probs[word] = {}
-            #    emission_sum = sum(emission_counts[word].values())
-            #    for tag in emission_counts[word]:
-            #        self.emission_probs[word][tag] = \
-            #                float(emission_counts[word][tag]) / emission_sum
-
-
-            for tag in emission_counts:
-                self.emission_probs[tag] = {}
-                emission_sum = sum(emission_counts[tag].values())
-
-                # add-lambda smoothing
-                for word in self.observations:
-                    if word in emission_counts[tag]:
-                        self.emission_probs[tag][word] = \
-                                float(emission_counts[tag][word] + lamda) / \
-                                (emission_sum + (lamda * len(self.observations)))
-                    else:
-                        self.emission_probs[tag][word] = \
-                                lamda / (emission_sum + (lamda * len(self.observations)))
-
-=======
 
                                
             self.calc_smooth_probs(transition_counts, self.transition_probs, self.states, lamda)
@@ -197,8 +158,7 @@ class HMM:
             self.calc_smooth_probs(sfx_emission_counts, self.sfx_emission_probs,
                     self.sfx_observations, lamda)
 
-            
->>>>>>> Stashed changes
+
             for tag in state_counts.keys():
                 self.tag_dict['<OOV>'].add(tag)
                 tag_total = sum(state_counts.values())
@@ -211,7 +171,7 @@ class HMM:
         # print("emission probabilities:", self.emission_probs)
         
 
-    def calc_state_probs(self, i, w_i, prev_word, direction=None):
+    def calc_state_probs(self, i, w_i, prev_word, unit="word", direction=None):
         # if forward, state_probs = self.alpha_t
         # if backward, state_probs = self.beta_t
 
@@ -221,11 +181,19 @@ class HMM:
         elif direction == "backward":
             state_p = self.beta_t
 
+        if unit=="suffix":
+            tag_d = self.sfx_tag_dict
+            emission_p = self.sfx_emission_probs
+
+        else:
+            tag_d = self.tag_dict
+            emission_p = self.emission_probs
+
+
         # TODO: handle EOS
         if w_i == "###":
             # SOS
             if prev_word == '':
-                state_p[w_i] = [math.log(1)] # the probability of starting is 1
                 if direction == "forward":
                     self.mu_t[w_i] = [math.log(1)]
                 prev_word = "###"
@@ -234,20 +202,29 @@ class HMM:
             # EOS
             else:
                 tags = {'###'}
-                prev_tags = self.tag_dict[prev_word]
-        
+                #prev_tags = self.tag_dict[prev_word]
+                #prev_tags = tag_d[prev_word]
+                try:
+                    prev_tags = self.tag_dict[prev_word]
+                except:
+                    prev_tags = self.sfx_tag_dict[prev_word]
+           
         # First word
         elif prev_word == '###':
-            tags = self.tag_dict[w_i]
+            #tags = self.tag_dict[w_i]
+            tags = tag_d[w_i]
             prev_tags = {'###'} # ### tags ###
 
         else:
-            tags = self.tag_dict[w_i]
-            prev_tags = self.tag_dict[prev_word]
+            tags = tag_d[w_i]
+            try:
+                prev_tags = self.tag_dict[prev_word]
+            except:
+                prev_tags = self.sfx_tag_dict[prev_word]
+            #tags = self.tag_dict[w_i]
+            #prev_tags = self.tag_dict[prev_word]
         
         for t_i in tags:
-            if t_i not in state_p.keys():
-                state_p[t_i] = [math.log(1)]
             
             # VITERBI
             if direction == "forward":
@@ -260,12 +237,13 @@ class HMM:
                 while len(self.back_t[t_i]) <= i:
                     self.back_t[t_i].append('')
 
-            while len(state_p[t_i]) <= i:
-                state_p[t_i].append(float('-inf'))
 
             for t_im1 in prev_tags:
                 p = math.log(self.transition_probs[t_im1][t_i]) + \
-                    math.log(self.emission_probs[t_i][w_i])
+                    math.log(emission_p[t_i][w_i])
+
+                #p = math.log(self.transition_probs[t_im1][t_i]) + \
+                #    math.log(self.emission_probs[t_i][w_i])
                 mu = state_p[t_im1][i-1] + p
 
                 if direction == "forward" and mu > self.mu_t[t_i][i]:
@@ -277,15 +255,21 @@ class HMM:
                 state_p[t_i][i] = np.logaddexp(state_p[t_i][i], mu)
 
 
-    def get_max_tag(self, i, w_i):
+    def get_max_tag(self, i, w_i, unit=None):
 
         if w_i=="###":
             return "###"
 
+        if unit=="suffix":
+            tag_d = self.sfx_tag_dict
+        else:
+            tag_d = self.tag_dict
+
         max_tag_score = float('-inf')
         max_tag = None
 
-        for tag in self.tag_dict[w_i]:
+        #for tag in self.tag_dict[w_i]:
+        for tag in tag_d[w_i]:
             predicted_tag_score = self.alpha_t[tag][-i-1] + self.beta_t[tag][i]
             
             # Line 13 of pseudocode normalises but there is no need to normalise since we are
@@ -307,6 +291,8 @@ class HMM:
         known_correct = 0
         unknown_correct = 0
 
+        wrong_tags = []
+
         for i in range(0, len(true_tags)):
             if true_tags[i] == pred_tags[i] and true_tags[i] != "###":
                 correct += 1
@@ -321,6 +307,8 @@ class HMM:
                 if known[i] == True:
                     known_total += 1
 
+                wrong_tags.append(true_tags[i])
+
         unknown_total = total - known_total
         accuracy = float(correct) / total
         known_accuracy = float(known_correct) / known_total
@@ -329,7 +317,7 @@ class HMM:
         else:
             unknown_accuracy = 0
 
-
+        print("Wrongly tagged:", Counter(wrong_tags))
         return (accuracy, known_accuracy, unknown_accuracy)
 
 
@@ -371,19 +359,31 @@ class HMM:
 
             w_i, tag = line.strip().split('/')
             true_tags.append(tag)
-
+            
             if w_i[0] in NUM_SET and w_i[-1] in NUM_SET:
                 w_i = '<NUM>'
 
             if w_i not in self.observations:
-                w_i = '<OOV>'
                 known[i] = False
+                w_i = self.get_suffix(w_i)
+                unit = "suffix"
+
+                if w_i not in self.sfx_observations:
+                    w_i = '<OOV>'
+                    unit = "word"
+            else:
+                unit = "word"
 
             if i > 0:
-                crossentropy += math.log(self.transition_probs[true_tags[i-1]][true_tags[i]]) \
+                if unit=="word":
+                    crossentropy += math.log(self.transition_probs[true_tags[i-1]][true_tags[i]]) \
                         + math.log(self.emission_probs[tag][w_i])
+                else:
+                    crossentropy += math.log(self.transition_probs[true_tags[i-1]][true_tags[i]]) \
+                        + math.log(self.sfx_emission_probs[tag][w_i])
 
-            self.calc_state_probs(i, w_i, prev_word, direction="forward")
+
+            self.calc_state_probs(i, w_i, prev_word, unit=unit, direction="forward")
             prev_word = w_i
 
         # compare and evaluate
@@ -411,24 +411,24 @@ class HMM:
             w_i, tag = line.strip().split('/')
             original_words.append(w_i)
 
-<<<<<<< Updated upstream
-=======
             if w_i[0] in NUM_SET and w_i[-1] in NUM_SET:
                 w_i = '<NUM>'
             
->>>>>>> Stashed changes
             if w_i not in self.observations:
-                w_i = '<OOV>'
+                known[i] = False
+                w_i = self.get_suffix(w_i)
+                unit = "suffix"
 
-            self.calc_state_probs(i, w_i, prev_word, direction="backward")
+                if w_i not in self.sfx_observations:
+                    w_i = '<OOV>'
+                    unit = "word"
+            else:
+                unit = "word"
+
+            self.calc_state_probs(i, w_i, prev_word, unit=unit, direction="backward")
             prev_word = w_i
 
-            predicted_tags.append(self.get_max_tag(i, w_i))
-
-        # Sanity check
-        #for i in range(len(self.beta_t['H'])):
-        #    print(i, math.exp(self.beta_t['H'][i]))
-
+            predicted_tags.append(self.get_max_tag(i, w_i, unit))
         
         tags = predicted_tags[::-1]
         original_words = original_words[::-1]
