@@ -33,6 +33,7 @@ class HMM:
             num_words = 0
             transition_counts = {}
             emission_counts = {}
+            state_counts = defaultdict(int)
             
             SOS = False
 
@@ -67,7 +68,8 @@ class HMM:
                     start_counts[tag] += 1
                     num_sentences += 1
                     SOS = False
-                
+               
+                state_counts[tag] += 1
 
                 # Unsmoothed version. If tag has not been seen in training set will assign
                 # 0 prob
@@ -105,8 +107,7 @@ class HMM:
                     else:
                         self.transition_probs[prev_tag][tag] = \
                                 lamda / (transition_sum + lamda * len(self.states))
-            
-            
+
             #for word in emission_counts:
             #    self.emission_probs[word] = {}
             #    emission_sum = sum(emission_counts[word].values())
@@ -129,12 +130,16 @@ class HMM:
                         self.emission_probs[tag][word] = \
                                 lamda / (emission_sum + (lamda * len(self.observations)))
 
-        self.tag_dict['<OOV>'].update(self.states)
-        self.tag_dict['<OOV>'].difference_update({'###'})
-        # print("transition probabilities:", self.transition_probs)
+            for tag in state_counts.keys():
+                self.tag_dict['<OOV>'].add(tag)
+                tag_total = sum(state_counts.values())
 
+                self.emission_probs[tag]['<OOV>'] = \
+                        float(state_counts[tag]) / tag_total
+
+
+        # print("transition probabilities:", self.transition_probs)
         # print("emission probabilities:", self.emission_probs)
-        print()
         
 
     def calc_state_probs(self, i, w_i, prev_word, direction=None):
@@ -152,6 +157,8 @@ class HMM:
             # SOS
             if prev_word == '':
                 state_p[w_i] = [math.log(1)] # the probability of starting is 1
+                if direction == "forward":
+                    self.mu_t[w_i] = [math.log(1)]
                 prev_word = "###"
                 return prev_word
             
@@ -169,11 +176,20 @@ class HMM:
             tags = self.tag_dict[w_i]
             prev_tags = self.tag_dict[prev_word]
         
-        # initialize state_p[i] and self.back_t[i]
         for t_i in tags:
-
             if t_i not in state_p.keys():
                 state_p[t_i] = [math.log(1)]
+            
+            # VITERBI
+            if direction == "forward":
+                if t_i not in self.mu_t.keys():
+                    self.mu_t[t_i] = [math.log(1)]
+                while len(self.mu_t[t_i]) <= i:
+                    self.mu_t[t_i].append(float('-inf'))
+                if t_i not in self.back_t.keys():
+                    self.back_t[t_i] = ['###']
+                while len(self.back_t[t_i]) <= i:
+                    self.back_t[t_i].append('')
 
             while len(state_p[t_i]) <= i:
                 state_p[t_i].append(float('-inf'))
@@ -181,9 +197,11 @@ class HMM:
             for t_im1 in prev_tags:
                 p = math.log(self.transition_probs[t_im1][t_i]) + \
                     math.log(self.emission_probs[t_i][w_i])
-                
-                    #pdb.set_trace()
                 mu = state_p[t_im1][i-1] + p
+
+                if direction == "forward" and mu > self.mu_t[t_i][i]:
+                    self.mu_t[t_i][i] = mu
+                    self.back_t[t_i][i] = t_im1
 
                 # Cannot just add log probs here. 
                 # we need to do log sum exponentials as explained on R-10
@@ -199,8 +217,7 @@ class HMM:
         max_tag = None
 
         for tag in self.tag_dict[w_i]:
-            print(w_i, tag, len(self.alpha_t[tag]), len(self.beta_t[tag]))
-            predicted_tag_score = self.alpha_t[tag][-i] + self.beta_t[tag][i]
+            predicted_tag_score = self.alpha_t[tag][-i-1] + self.beta_t[tag][i]
             
             # Line 13 of pseudocode normalises but there is no need to normalise since we are
             # taking the max.
@@ -209,7 +226,42 @@ class HMM:
                 max_tag = tag
                 max_tag_score = predicted_tag_score
 
+        if max_tag is None:
+            max_tag = 'N'
         return max_tag
+
+
+    def evaluate(self, pred_tags, true_tags, known):
+        correct = 0
+        total = 0
+        known_total = 0
+        known_correct = 0
+        unknown_correct = 0
+
+        for i in range(0, len(true_tags)):
+            if true_tags[i] == pred_tags[i] and true_tags[i] != "###":
+                correct += 1
+                total += 1
+                if known[i] == True:
+                    known_total += 1
+                    known_correct += 1
+                else:
+                    unknown_correct += 1
+            elif true_tags[i] != "###":
+                total += 1
+                if known[i] == True:
+                    known_total += 1
+
+        unknown_total = total - known_total
+        accuracy = float(correct) / total
+        known_accuracy = float(known_correct) / known_total
+        if unknown_total > 0:
+            unknown_accuracy = float(unknown_correct) / unknown_total
+        else:
+            unknown_accuracy = 0
+
+
+        return (accuracy, known_accuracy, unknown_accuracy)
 
 
     def test_and_eval(self, test_file):
@@ -234,9 +286,20 @@ class HMM:
             testlines = f.readlines()
         
         known = [True] * len(testlines)
+
+        # initialize alpha_t and beta_t
+        for state in self.states:
+            self.alpha_t[state] = [math.log(1)]
+            self.beta_t[state] = [math.log(1)]
+
+            for i in range(1, len(testlines)):
+                self.alpha_t[state].append(float('-inf'))
+                self.beta_t[state].append(float('-inf'))
+
         # forward pass
         for i in range(len(testlines)):
             line = testlines[i]
+
             w_i, tag = line.strip().split('/')
             true_tags.append(tag)
 
@@ -250,7 +313,17 @@ class HMM:
 
             self.calc_state_probs(i, w_i, prev_word, direction="forward")
             prev_word = w_i
-       
+
+        # compare and evaluate
+        # viterbi
+        n = i
+        tags = [''] * (n+1)
+        tags[n] = '###'
+        for i in range(n, -1, -1):
+            tags[i-1] = self.back_t[tags[i]][i]
+        
+        viterbi_eval = self.evaluate(tags, true_tags, known)
+
         # backward pass
         #   note beta_t is reversed indexed in order to reuse the way initialisation works 
         #   i.e., beta_t[0] is the state of the last observed word.
@@ -259,10 +332,13 @@ class HMM:
         prev_word = ''
         self.mu_t = {}
         self.back_t = {}
+        
+        original_words = []
         for i in range(len(testlines)):
-
             line = testlines[len(testlines)-1-i]
             w_i, tag = line.strip().split('/')
+            original_words.append(w_i)
+
             if w_i not in self.observations:
                 w_i = '<OOV>'
 
@@ -274,46 +350,30 @@ class HMM:
         # Sanity check
         #for i in range(len(self.beta_t['H'])):
         #    print(i, math.exp(self.beta_t['H'][i]))
+
         
-        # compare and evaluate
-        correct = 0
-        total = 0
-        known_total = 0
-        known_correct = 0
-        unknown_correct = 0
         tags = predicted_tags[::-1]
+        original_words = original_words[::-1]
 
-        for i in range(0, len(true_tags)):
-            if true_tags[i] == tags[i] and true_tags[i] != "###":
-                correct += 1
-                total += 1
-                if known[i] == True:
-                    known_total += 1
-                    known_correct += 1
-                else:
-                    unknown_correct += 1
-            elif true_tags[i] != "###":
-                total += 1
-                if known[i] == True:
-                    known_total += 1
+        with open('test-output', 'w') as out_f:
+            for i, word in enumerate(original_words):
+                out_f.write(word+'/'+tags[i]+'\n')
+
+        # evaluate posterior decoding
+        posterior_eval = self.evaluate(tags, true_tags, known)
         
-        unknown_total = total - known_total
-        print("accuracy: {}".format(float(correct) / total))
-        print("known accuracy: {}".format(float(known_correct) / known_total))
-        if unknown_total > 0:
-            print("unknown accuracy: {}".format(float(unknown_correct) / unknown_total))
-        #print("predicted tags: {}\nlength: {}".format(tags, len(tags)))
-        for i in range(10):
-            print(tags[-i], end=" ")
-            print(true_tags[-i])
-        #print("true tags: {}\nlength: {}".format(true_tags, len(true_tags)))     
-
         # Calculate perplexity at the end of forwardpass
         # length -1 because of ###/### at SOS
         # 
         # self.alpha_t['###'] should contain the sum of alpha_t
         perplexity = math.exp( - crossentropy / (len(testlines)-1))
-        print("perplexity:", perplexity)
+        print("Model perplexity per tagged test word:", perplexity)
+        print("Tagging accuracy (Viterbi decoding): {0:.2f}%\t(known: {1:.2f}% novel: {2:.2f}%)".format(\
+                viterbi_eval[0]*100, viterbi_eval[1]*100, viterbi_eval[2]*100))
+        print("Tagging accuracy (posterior decoding): {0:.2f}%\t(known: {1:.2f}% novel: {2:.2f}%)".format(\
+                posterior_eval[0]*100, posterior_eval[1]*100, posterior_eval[2]*100))
+
+
 
 
 
