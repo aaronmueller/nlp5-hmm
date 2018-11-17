@@ -12,6 +12,8 @@ import pdb
 from collections import defaultdict
 import math
 
+NUM_SET = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'}
+
 class HMM:
     def __init__(self):
         self.states = set()
@@ -26,6 +28,53 @@ class HMM:
         self.back_t = {}
 
     # fill variables declared in __init__
+<<<<<<< Updated upstream
+=======
+
+    def get_suffix(self, word):
+        #
+        # uncomment "return word" below to remove the effect of suffix
+        #
+        
+        # return word
+
+        # -4 is the best length so far
+        # from 92.65% to 93.59%
+
+        #if len(word)>3:
+        #    sfx = word[-4:]
+        if len(word)>3:
+            sfx = word[-4:]
+        else:
+            sfx = word
+        return sfx
+    
+    def add_count(self, ind1, ind2, count_dict):
+        if ind1 not in count_dict:
+            count_dict[ind1] = defaultdict(int)
+        count_dict[ind1][ind2] +=1
+        return count_dict
+
+    def calc_smooth_probs(self, count_dict, probs, vals, lamda):
+
+        #count_dict = transition_counts
+        #probs = transition_probs
+        #target = self.states
+
+        for index1 in count_dict:
+            probs[index1] = {}
+            normalising_sum = sum(count_dict[index1].values())
+
+            for index2 in vals:
+                if index2 in count_dict[index1]:
+                    probs[index1][index2] = \
+                        float(count_dict[index1][index2] + lamda)/ \
+                        (normalising_sum + (lamda * len(vals)))
+                else:
+                    probs[index1][index2] = \
+                        lamda/ (normalising_sum + lamda * len(vals))
+
+>>>>>>> Stashed changes
     def train(self, train_file):
         with open(train_file, 'r') as f:
             start_counts = defaultdict(int)
@@ -39,10 +88,19 @@ class HMM:
 
             lamda = 1
             self.observations.add('<OOV>')
+            self.observations.add('<NUM>')
             self.tag_dict['<OOV>'] = set()
 
             for line_no, line in enumerate(f):
                 word, tag = line.strip().split('/')
+<<<<<<< Updated upstream
+=======
+
+                if word[0] in NUM_SET and word[-1] in NUM_SET:
+                    word = '<NUM>'
+                
+                sfx = self.get_suffix(word)
+>>>>>>> Stashed changes
 
                 if word not in self.observations:
                     self.observations.add(word)
@@ -94,6 +152,7 @@ class HMM:
             for tag in start_counts.keys():
                 self.start_probs[tag] = float(start_counts[tag]) / num_sentences
 
+<<<<<<< Updated upstream
             for prev_tag in transition_counts:
                 self.transition_probs[prev_tag] = {}
                 transition_sum = sum(transition_counts[prev_tag].values())
@@ -130,6 +189,16 @@ class HMM:
                         self.emission_probs[tag][word] = \
                                 lamda / (emission_sum + (lamda * len(self.observations)))
 
+=======
+
+                               
+            self.calc_smooth_probs(transition_counts, self.transition_probs, self.states, lamda)
+            self.calc_smooth_probs(emission_counts, self.emission_probs, self.observations, lamda)
+            self.calc_smooth_probs(sfx_emission_counts, self.sfx_emission_probs,
+                    self.sfx_observations, lamda)
+
+            
+>>>>>>> Stashed changes
             for tag in state_counts.keys():
                 self.tag_dict['<OOV>'].add(tag)
                 tag_total = sum(state_counts.values())
@@ -303,6 +372,9 @@ class HMM:
             w_i, tag = line.strip().split('/')
             true_tags.append(tag)
 
+            if w_i[0] in NUM_SET and w_i[-1] in NUM_SET:
+                w_i = '<NUM>'
+
             if w_i not in self.observations:
                 w_i = '<OOV>'
                 known[i] = False
@@ -339,6 +411,12 @@ class HMM:
             w_i, tag = line.strip().split('/')
             original_words.append(w_i)
 
+<<<<<<< Updated upstream
+=======
+            if w_i[0] in NUM_SET and w_i[-1] in NUM_SET:
+                w_i = '<NUM>'
+            
+>>>>>>> Stashed changes
             if w_i not in self.observations:
                 w_i = '<OOV>'
 

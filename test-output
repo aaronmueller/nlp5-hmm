@@ -650,7 +650,7 @@ It/P
 was/V
 quoted/V
 at/I
-2.9428/N
+2.9428/C
 marks/N
 in/I
 late/J
@@ -680,8 +680,13 @@ on/I
 inflation/N
 will/M
 be/V
+<<<<<<< Updated upstream
 more/J
 bruising/N
+=======
+more/R
+bruising/V
+>>>>>>> Stashed changes
 than/I
 previously/R
 assumed/V
@@ -772,7 +777,7 @@ to/T
 a/D
 record/N
 #/#
-10.2/N
+10.2/C
 billion/C
 -LRB-/-
 $/$
@@ -1442,7 +1447,7 @@ Europe/N
 ###/###
 The/D
 Intel/N
-486/N
+486/C
 chip/N
 can/M
 process/N
@@ -1459,7 +1464,7 @@ while/I
 Intel/N
 's/P
 previous/J
-386/N
+386/C
 chip/N
 could/M
 handle/V
@@ -1565,7 +1570,7 @@ million/C
 ###/###
 Ferembal/N
 has/V
-930/N
+930/C
 workers/N
 at/I
 four/C
@@ -1602,7 +1607,7 @@ Security/N
 benefits/N
 will/M
 rise/V
-4.7/N
+4.7/C
 %/N
 next/I
 year/N
@@ -1661,7 +1666,7 @@ disabled/N
 also/R
 will/M
 rise/V
-4.7/N
+4.7/C
 %/N
 ,/,
 starting/V
@@ -1684,7 +1689,7 @@ $/$
 386/C
 from/I
 $/$
-368/N
+368/C
 a/D
 month/N
 ./.
@@ -1745,7 +1750,7 @@ to/T
 in/I
 1990/C
 from/I
-7.51/N
+7.51/C
 %/N
 and/C
 wo/M
@@ -1776,12 +1781,12 @@ each/D
 will/M
 rise/N
 $/$
-250.80/N
+250.80/C
 next/J
 year/N
 to/T
 $/$
-3,855.60/N
+3,855.60/C
 ./.
 ###/###
 Beneficiaries/N
@@ -1808,7 +1813,7 @@ in/I
 up/R
 from/I
 $/$
-8,880/N
+8,880/C
 this/D
 year/N
 ./.
@@ -2090,7 +2095,7 @@ $/$
 million/C
 ,/,
 or/C
-76/N
+76/C
 cents/N
 a/D
 share/N
@@ -2113,7 +2118,7 @@ Park/N
 Ill./N
 ,/,
 rose/V
-8.3/N
+8.3/C
 %/N
 to/T
 $/$
@@ -2283,7 +2288,7 @@ the/D
 company/N
 earned/V
 $/$
-1.38/N
+1.38/C
 a/D
 share/N
 ./.
@@ -2888,7 +2893,7 @@ million/C
 ,/,
 or/C
 $/$
-1.20/N
+1.20/C
 a/D
 share/N
 ,/,
@@ -3380,7 +3385,7 @@ full-year/J
 net/J
 to/T
 $/$
-6.80/N
+6.80/C
 a/D
 share/N
 from/I
@@ -3583,7 +3588,7 @@ million/C
 ,/,
 or/C
 $/$
-1.06/N
+1.06/C
 a/D
 share/N
 ,/,
@@ -3889,7 +3894,7 @@ million/C
 ,/,
 or/C
 $/$
-3.09/N
+3.09/C
 a/D
 share/N
 ./.
@@ -5311,7 +5316,7 @@ techniques/N
 index/N
 funds/N
 can/M
-trade/N
+trade/V
 back/R
 and/C
 forth/R
@@ -6352,7 +6357,7 @@ in/I
 a/D
 fund/N
 of/I
-244/N
+244/C
 companies/N
 that/I
 are/V
@@ -6416,14 +6421,14 @@ short/J
 interest/N
 dropped/V
 to/T
-523,920,214/N
+523,920,214/C
 shares/N
 as/I
 of/I
 Oct./N
 13/C
 from/I
-547,347,585/N
+547,347,585/C
 shares/N
 in/I
 mid-September/N
@@ -6436,10 +6441,10 @@ climbed/V
 3/C
 %/N
 to/T
-53,496,665/N
+53,496,665/C
 shares/N
 from/I
-51,911,566/N
+51,911,566/C
 shares/N
 ./.
 ###/###
@@ -6452,7 +6457,7 @@ the/D
 Big/N
 Board/N
 reported/V
-461,539,056/N
+461,539,056/C
 shares/N
 ,/,
 indicating/V
@@ -6466,7 +6471,7 @@ while/I
 the/D
 Amex/N
 reported/V
-36,015,194/N
+36,015,194/C
 shares/N
 ,/,
 a/D
@@ -6632,12 +6637,12 @@ interest/N
 ratio/N
 slipped/V
 to/T
-3.36/N
+3.36/C
 from/I
 last/J
 month/N
 's/P
-3.38/N
+3.38/C
 ./.
 ###/###
 The/D
@@ -6712,7 +6717,7 @@ largest/J
 short/J
 volumes/N
 with/I
-12,822,563/N
+12,822,563/C
 shares/N
 ./.
 ###/###
@@ -6764,10 +6769,10 @@ York/N
 exchange/N
 ,/,
 up/I
-3,383,477/N
+3,383,477/C
 shares/N
 to/T
-5,267,238/N
+5,267,238/C
 ./.
 ###/###
 Bristol-Myers/N
@@ -6794,11 +6799,11 @@ largest/J
 volume/N
 decline/N
 ,/,
-7,592,988/N
+7,592,988/C
 shares/N
 ,/,
 to/T
-12,017,724/N
+12,017,724/C
 ./.
 ###/###
 Short/N
@@ -6810,10 +6815,10 @@ Machines/N
 Corp./N
 plunged/V
 to/T
-1,425,035/N
+1,425,035/C
 shares/N
 from/I
-2,387,226/N
+2,387,226/C
 shares/N
 a/D
 month/N
@@ -6832,10 +6837,10 @@ short/J
 interest/N
 slid/V
 to/T
-4,469,167/N
+4,469,167/C
 shares/N
 from/I
-5,088,774/N
+5,088,774/C
 ./.
 ###/###
 On/I
@@ -6852,7 +6857,7 @@ gainers/N
 ,/,
 leaping/N
 to/T
-67,972/N
+67,972/C
 shares/N
 from/I
 three/C
@@ -6872,7 +6877,7 @@ to/T
 59/C
 shares/N
 from/I
-183,467/N
+183,467/C
 ./.
 ###/###
 The/D
@@ -6889,10 +6894,10 @@ Corp./N
 ,/,
 rising/V
 to/T
-3,820,634/N
+3,820,634/C
 shares/N
 from/I
-3,363,949/N
+3,363,949/C
 ./.
 ###/###
 Bolar/N
@@ -6904,11 +6909,11 @@ largest/J
 volume/N
 increase/N
 ,/,
-552,302/N
+552,302/C
 shares/N
 ,/,
 to/T
-2,157,656/N
+2,157,656/C
 ./.
 ###/###
 The/D
@@ -6944,10 +6949,10 @@ volume/N
 drop/N
 --/:
 down/I
-445,645/N
+445,645/C
 shares/N
 to/T
-141,903/N
+141,903/C
 --/:
 came/V
 in/I
@@ -6991,7 +6996,7 @@ to/T
 73,100/N
 shares/N
 from/I
-184/N
+184/C
 ./.
 ###/###
 Nelson/N
@@ -7010,7 +7015,7 @@ to/T
 1,000/C
 shares/N
 from/I
-255,923/N
+255,923/C
 ./.
 ###/###
 The/D
@@ -10761,7 +10766,7 @@ as/I
 100/C
 ,/,
 was/V
-180.9/N
+180.9/C
 in/I
 September/N
 ./.
@@ -11242,7 +11247,7 @@ million/C
 ,/,
 or/C
 $/$
-2.09/N
+2.09/C
 a/D
 share/N
 ,/,
@@ -11253,7 +11258,7 @@ million/C
 ,/,
 or/C
 $/$
-1.89/N
+1.89/C
 a/D
 share/N
 ./.
@@ -11465,7 +11470,7 @@ million/C
 ,/,
 or/C
 $/$
-1.93/N
+1.93/C
 a/D
 share/N
 ,/,
@@ -11613,7 +11618,7 @@ jet-engine/N
 manufacture/N
 ,/,
 declined/V
-9.8/N
+9.8/C
 %/N
 to/T
 $/$
@@ -11716,7 +11721,7 @@ attempts/N
 to/T
 corner/N
 the/D
-1979-80/N
+1979-80/C
 silver/J
 market/N
 ./.
@@ -12315,7 +12320,7 @@ years/N
 ./.
 ###/###
 The/D
-473/N
+473/C
 funds/N
 tracked/V
 by/I
@@ -12433,7 +12438,7 @@ on/I
 direct/J
 money-market/N
 instruments/N
-following/N
+following/V
 the/D
 stock-market/N
 decline/N
@@ -12480,7 +12485,7 @@ compounded/V
 yield/V
 fell/V
 to/T
-8.55/N
+8.55/C
 %/N
 from/I
 8.60/C
@@ -12510,10 +12515,10 @@ average/N
 yield/V
 fell/V
 to/T
-7.61/N
+7.61/C
 %/N
 from/I
-7.82/N
+7.82/C
 %/N
 ./.
 ###/###
@@ -12535,7 +12540,7 @@ Tuesday/N
 ./.
 ###/###
 The/D
-142/N
+142/C
 institutional-type/N
 money/N
 funds/N
@@ -12550,7 +12555,7 @@ billion/C
 ./.
 ###/###
 The/D
-235/N
+235/C
 general-purpose/N
 funds/N
 increased/V
@@ -12648,7 +12653,7 @@ in/I
 Malaysia/N
 plummeted/V
 in/I
-1984-85/N
+1984-85/C
 ./.
 ###/###
 He/P
@@ -12736,7 +12741,7 @@ to/T
 the/D
 Hong/N
 Kong/N
-1982-83/N
+1982-83/C
 property-price/N
 collapse/N
 ,/,
@@ -12776,7 +12781,7 @@ was/V
 left/V
 with/I
 M$/N
-2.26/N
+2.26/C
 billion/C
 in/I
 bad/J
@@ -12968,7 +12973,7 @@ pretax/N
 profit/N
 of/I
 M$/N
-168/N
+168/C
 million/C
 if/I
 it/P
@@ -13114,7 +13119,7 @@ covers/N
 an/D
 additional/J
 M$/N
-450/N
+450/C
 million/C
 in/I
 provisions/N
@@ -13874,7 +13879,11 @@ candidate/N
 ###/###
 By/I
 a/D
+<<<<<<< Updated upstream
 2-to-1/N
+=======
+2-to-1/C
+>>>>>>> Stashed changes
 ratio/N
 ,/,
 voters/N
@@ -15352,11 +15361,11 @@ the/D
 news/N
 ,/,
 closing/V
-39.55/N
+39.55/C
 points/N
 higher/J
 at/I
-2683.20/N
+2683.20/C
 ./.
 ###/###
 Bond/N
@@ -15652,7 +15661,7 @@ It/P
 increasingly/R
 appears/V
 that/I
-1987-88/N
+1987-88/C
 was/V
 a/D
 temporary/J
@@ -15693,7 +15702,7 @@ and/C
 consumer/N
 prices/N
 rose/V
-4.4/N
+4.4/C
 %/N
 ./.
 ###/###
@@ -15711,7 +15720,7 @@ prices/N
 soaring/V
 at/I
 a/D
-6.7/N
+6.7/C
 %/N
 annual/J
 rate/N
@@ -15739,7 +15748,7 @@ rate/N
 back/R
 down/R
 to/T
-4.4/N
+4.4/C
 %/N
 ./.
 ###/###
@@ -15791,7 +15800,7 @@ said/V
 ``/`
 Back/R
 in/I
-1987-88/N
+1987-88/C
 ,/,
 business/N
 was/V
@@ -16003,7 +16012,7 @@ steep/J
 ascent/N
 ,/,
 rising/V
-0.8/N
+0.8/C
 %/N
 after/I
 four/C
@@ -16044,7 +16053,7 @@ level/N
 ###/###
 They/P
 dropped/V
-0.4/N
+0.4/C
 %/N
 as/I
 dealers/N
@@ -16438,10 +16447,17 @@ diverse/J
 group/N
 of/I
 skiers/N
+<<<<<<< Updated upstream
 gracefully/N
 gliding/N
 down/I
 sun-drenched/N
+=======
+gracefully/R
+gliding/V
+down/R
+sun-drenched/V
+>>>>>>> Stashed changes
 slopes/N
 :/:
 senior/J
@@ -16852,7 +16868,7 @@ To/T
 make/V
 skiing/N
 more/J
-convenient/N
+convenient/J
 for/I
 time-strapped/N
 visitors/N
@@ -16991,7 +17007,7 @@ by/I
 million/C
 to/T
 about/I
-21.7/N
+21.7/C
 million/C
 in/I
 the/D
@@ -17386,7 +17402,7 @@ gathered/N
 at/I
 Candlestick/N
 at/I
-5:04/N
+5:04/C
 p.m./N
 Tuesday/N
 ,/,
@@ -17488,7 +17504,7 @@ bothered/N
 ''/'
 ###/###
 I/P
-'d/V
+'d/M
 slept/N
 through/I
 my/P
@@ -17527,7 +17543,7 @@ the/D
 urge/V
 to/T
 talk/V
-about/I
+about/R
 them/P
 ./.
 ###/###
@@ -17789,7 +17805,7 @@ then/R
 6.9/C
 ,/,
 then/R
-7.0/N
+7.0/C
 ./.
 ###/###
 A/D
@@ -17819,7 +17835,7 @@ died/V
 ./.
 ###/###
 At/I
-5:40/N
+5:40/C
 p.m./N
 ,/,
 scheduled/V
@@ -19507,7 +19523,7 @@ a/D
 group/N
 that/I
 holds/V
-6.2/N
+6.2/C
 %/N
 of/I
 its/P
@@ -19744,7 +19760,7 @@ million/C
 ,/,
 or/C
 $/$
-1.70/N
+1.70/C
 a/D
 share/N
 ,/,
@@ -19811,7 +19827,7 @@ expectations/N
 of/I
 about/I
 $/$
-1.16/N
+1.16/C
 a/D
 share/N
 ./.
@@ -20187,7 +20203,7 @@ million/C
 ,/,
 or/C
 $/$
-3.04/N
+3.04/C
 a/D
 share/N
 ,/,
@@ -20206,7 +20222,7 @@ million/C
 ,/,
 or/C
 $/$
-5.76/N
+5.76/C
 a/D
 share/N
 ,/,
@@ -21021,7 +21037,7 @@ Securities/N
 Reform/N
 Act/N
 of/I
-1975/N
+1975/C
 ./.
 ###/###
 Last/J
@@ -21370,7 +21386,7 @@ hit/V
 ,/,
 they/P
 hit/V
-fast/J
+fast/R
 ,/,
 ''/'
 says/V
@@ -22856,7 +22872,7 @@ to/T
 the/D
 ratio/N
 of/I
-19.7/N
+19.7/C
 that/I
 prevailed/V
 before/I
@@ -22878,7 +22894,7 @@ above/I
 the/D
 ratio/N
 -LRB-/-
-7.5/N
+7.5/C
 times/N
 cash/N
 flow/N
@@ -23992,7 +24008,7 @@ of/I
 101/C
 to/T
 yield/V
-7.955/N
+7.955/C
 %/N
 ,/,
 compared/V
@@ -24000,7 +24016,7 @@ with/I
 100/C
 to/T
 yield/V
-8.032/N
+8.032/C
 %/N
 Wednesday/N
 ./.
@@ -24016,7 +24032,7 @@ at/I
 100/C
 to/T
 yield/V
-7.937/N
+7.937/C
 %/N
 ,/,
 compared/V
@@ -24024,7 +24040,7 @@ with/I
 99/C
 to/T
 yield/V
-8.007/N
+8.007/C
 %/N
 ./.
 ###/###
@@ -24043,10 +24059,10 @@ Treasury/N
 bills/N
 rose/V
 to/T
-7.56/N
+7.56/C
 %/N
 from/I
-7.51/N
+7.51/C
 %/N
 Wednesday/N
 ,/,
@@ -24058,7 +24074,7 @@ six-month/J
 bills/N
 rose/V
 to/T
-7.57/N
+7.57/C
 %/N
 from/I
 7.53/N
@@ -24086,12 +24102,12 @@ on/I
 the/D
 bills/N
 was/V
-7.35/N
+7.35/C
 %/N
 ,/,
 down/R
 from/I
-7.61/N
+7.61/C
 %/N
 at/I
 the/D
@@ -24376,7 +24392,7 @@ maturity/N
 range/N
 unchanged/J
 to/T
-0.05/N
+0.05/C
 percentage/N
 point/N
 higher/J
@@ -24415,7 +24431,7 @@ Authority/N
 %/N
 issue/N
 of/I
-2018/N
+2018/C
 was/V
 up/R
 at/I
@@ -24428,7 +24444,7 @@ about/I
 %/N
 ,/,
 down/I
-0.03/N
+0.03/C
 percentage/N
 point/N
 ./.
@@ -24671,10 +24687,10 @@ Mae/N
 %/N
 securities/N
 were/V
-down/I
+down/R
 about/I
 at/I
-109/N
+109/C
 ./.
 ###/###
 If/I
@@ -24778,11 +24794,11 @@ Treasury/N
 10-year/J
 note/N
 widened/V
-0.03/N
+0.03/C
 percentage/N
 point/N
 to/T
-1.48/N
+1.48/C
 ./.
 ###/###
 While/I
@@ -24876,7 +24892,7 @@ at/I
 111/C
 to/T
 yield/V
-10.09/N
+10.09/C
 %/N
 ,/,
 while/I
@@ -24892,7 +24908,7 @@ at/I
 98/C
 to/T
 yield/V
-12.94/N
+12.94/C
 %/N
 ./.
 ###/###
@@ -24910,13 +24926,13 @@ of/I
 1998/C
 ended/V
 off/I
-0.03/N
+0.03/C
 at/I
-95.72/N
+95.72/C
 ,/,
 to/T
 yield/V
-5.32/N
+5.32/C
 %/N
 ,/,
 and/C
@@ -24933,14 +24949,14 @@ due/J
 October/N
 1999/C
 ended/V
-0.05/N
+0.05/C
 point/N
 lower/J
 at/I
-99.85/N
+99.85/C
 to/T
 yield/V
-7.02/N
+7.02/C
 %/N
 ./.
 ###/###
