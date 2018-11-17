@@ -1,0 +1,15 @@
+C - numbers
+W - question words
+P - pronouns
+N - nouns
+J - adhective
+V - verb
+I - preposition
+D - some this that
+M - can should (lower case)?
+R - ly
+$ - anything wiht $
+: - anything with ..
+- - stuff with -
+F - hello (lower acase?)
+L - a- b- c-
