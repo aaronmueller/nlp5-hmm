@@ -62,7 +62,7 @@ class HMM:
 
         #count_dict = transition_counts
         #probs = transition_probs
-        #target = self.states
+        #vals= self.states
 
         for index1 in count_dict:
             probs[index1] = {}
@@ -89,7 +89,7 @@ class HMM:
             
             SOS = False
 
-            lamda = 1
+            lamda = 0
             self.observations.add('<OOV>')
             self.tag_dict['<OOV>'] = set()
 
@@ -233,12 +233,27 @@ class HMM:
 
 
             for t_im1 in prev_tags:
-                p = math.log(self.transition_probs[t_im1][t_i]) + \
-                    math.log(emission_p[t_i][w_i])
 
-                #p = math.log(self.transition_probs[t_im1][t_i]) + \
-                #    math.log(self.emission_probs[t_i][w_i])
-                mu = state_p[t_im1][i-1] + p
+                if direction == "forward":
+                    prob = math.log(self.transition_probs[t_im1][t_i]) + \
+                        math.log(emission_p[t_i][w_i])
+                
+                if direction=="backward":
+                    if prev_word=="###":
+                        prob = math.log(self.transition_probs[t_i][t_im1])
+                    else:
+                        trans_prob = math.log(self.transition_probs[t_i][t_im1])
+                        try:
+                            emiss_prob = math.log(self.emission_probs[t_im1][prev_word])
+                        except:
+                            emiss_prob = math.log(self.sfx_emission_probs[t_im1][prev_word])
+                        
+                        prob = trans_prob + emiss_prob
+                    print(i, t_im1, t_i, w_i, prob)
+ 
+
+                mu = state_p[t_im1][i-1] + prob
+                    
 
                 if direction == "forward" and mu > self.mu_t[t_i][i]:
                     self.mu_t[t_i][i] = mu
@@ -247,6 +262,8 @@ class HMM:
                 # Cannot just add log probs here. 
                 # we need to do log sum exponentials as explained on R-10
                 state_p[t_i][i] = np.logaddexp(state_p[t_i][i], mu)
+                
+
 
 
     def get_max_tag(self, i, w_i, unit=None):
@@ -368,7 +385,7 @@ class HMM:
             if i > 0:
                 if unit=="word":
                     crossentropy += math.log(self.transition_probs[true_tags[i-1]][true_tags[i]]) \
-                        + math.log(self.emission_probs[tag][w_i])
+                    + math.log(self.emission_probs[tag][w_i])
                 else:
                     crossentropy += math.log(self.transition_probs[true_tags[i-1]][true_tags[i]]) \
                         + math.log(self.sfx_emission_probs[tag][w_i])
@@ -379,7 +396,6 @@ class HMM:
 
         # compare and evaluate
         # viterbi
-        pdb.set_trace()
         n = i
         tags = [''] * (n+1)
         tags[n] = '###'
@@ -414,8 +430,12 @@ class HMM:
                     unit = "word"
             else:
                 unit = "word"
-
             self.calc_state_probs(i, w_i, prev_word, unit=unit, direction="backward")
+            #if i<6:
+            #    print("betaH:", math.exp(self.beta_t['H'][i]))
+            #    print("betaC:", math.exp(self.beta_t['C'][i]))
+
+
             prev_word = w_i
 
             predicted_tags.append(self.get_max_tag(i, w_i, unit))
@@ -440,6 +460,30 @@ class HMM:
                 viterbi_eval[0]*100, viterbi_eval[1]*100, viterbi_eval[2]*100))
         print("Tagging accuracy (posterior decoding): {0:.2f}%\t(known: {1:.2f}% novel: {2:.2f}%)".format(\
                 posterior_eval[0]*100, posterior_eval[1]*100, posterior_eval[2]*100))
+
+        with open('./alpha_t_c2.log', 'w') as f:
+            lines = []
+            for i in range(len(self.alpha_t['C'])):
+                lines.append("{} {}".format(i, math.exp(self.alpha_t['C'][i])))
+            f.write("\n".join(lines))
+
+        with open('./alpha_t_h2.log', 'w') as f:
+            lines = []
+            for i in range(len(self.alpha_t['H'])):
+                lines.append("{} {}".format(i, math.exp(self.alpha_t['H'][i])))
+            f.write("\n".join(lines))
+
+        with open('./beta_t_h2.log', 'w') as f:
+            lines = []
+            for i in range(len(self.beta_t['H'])):
+                lines.append("{} {}".format(i, math.exp(self.beta_t['H'][::-1][i])))
+            f.write("\n".join(lines))
+
+        with open('./beta_t_c2.log', 'w') as f:
+            lines = []
+            for i in range(len(self.beta_t['C'])):
+                lines.append("{} {}".format(i, math.exp(self.beta_t['C'][::-1][i])))
+            f.write("\n".join(lines))
 
 
 
