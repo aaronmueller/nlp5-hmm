@@ -379,6 +379,7 @@ class HMM:
 
         # compare and evaluate
         # viterbi
+        pdb.set_trace()
         n = i
         tags = [''] * (n+1)
         tags[n] = '###'
@@ -447,4 +448,5 @@ class HMM:
 # run Hidden Markov Model on specified training and testing files
 hmm = HMM()
 hmm.train(sys.argv[1])
+
 hmm.test_and_eval(sys.argv[2])
