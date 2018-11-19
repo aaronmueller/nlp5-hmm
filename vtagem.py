@@ -16,7 +16,7 @@ import math
 class HMM:
     def __init__(self, train_file, raw_file, test_file):
 
-        self.lamda = 0
+        self.lamda = 1
 
         self.states = set()
         self.observations = set()
@@ -200,9 +200,20 @@ class HMM:
 
         else:     
             # Update transition counts
+            # p tag for each state
+            
+            #total_state_prob = {}
+            #for tag in self.states:
+            #    total_state_prob[tag] = 0
+            #    for i in range(len(self.raw_words)):
+            #        total_state_prob[tag] += math.exp(self.alpha_t[tag][i]
+            #                + self.beta_t[tag][i] - self.alpha_t['###'][-1])
+
+
             for prev in self.new_transition_counts.keys():
                 for curr in self.new_transition_counts[prev].keys():
                     count = self.new_transition_counts[prev][curr]
+                    #* self.raw_word_counts[]
                     # add count function handles self.new items
                     self.transition_counts = self.add_count(count, prev, curr,
                             self.transition_counts)
@@ -216,8 +227,7 @@ class HMM:
                     self.emission_counts = self.add_count(count, tag, word, self.emission_counts)
 
             # Update observations
-            # This is wasteful because we always see the same observations
-            # But we only want to update this after the first test-eval or the counts
+            # We only want to update this after the first test-eval or the counts
             # might screw up 
             self.observations = self.observations.union(self.new_observations)
 
@@ -225,13 +235,11 @@ class HMM:
             self.calc_smooth_probs(self.emission_counts, self.emission_probs, self.observations)
         
             # Update tag_dict
-            # This step is abit wasteful because we keep seeing the same words anyway
-            for word in self.new_tag_dict.keys():
-                if word in self.tag_dict:
-                    self.tag_dict[word] = self.tag_dict[word].union(self.new_tag_dict[word])
-                else:
-                    self.tag_dict[word] = self.new_tag_dict[word]
-
+            #for word in self.new_tag_dict.keys():
+            #    if word in self.tag_dict:
+            #        self.tag_dict[word] = self.tag_dict[word].union(self.new_tag_dict[word])
+            #    else:
+            #        self.tag_dict[word] = self.new_tag_dict[word]
             # Update state counts
             for tag in self.new_state_counts.keys():
                 self.state_counts[tag] += self.new_state_counts[tag]
@@ -248,6 +256,7 @@ class HMM:
     def doEStep(self):
 
         # Reset all counts before forward_backward
+        print("Reset counts")
         self.new_transition_counts = {}
         self.new_emission_counts = {}
         self.new_state_counts = defaultdict(int)
@@ -255,7 +264,8 @@ class HMM:
 
         # Now do forward-backward to accumulate counts again
         predicted_tags, crossentropy = self.forward_backward(words=self.raw_words)
-        print("Perplexity per untagged raw word: {0:.3f}".format(\
+
+        print("(EM) Perplexity per untagged raw word: {0:.3f}".format(\
                 math.exp(-self.alpha_t['###'][len(self.raw_words)-1]/len(self.raw_words))))
 
         ### Sanity check ###
@@ -274,7 +284,7 @@ class HMM:
         #with open('./alpha_t_c.log', 'w') as f:
         #    lines = []
         #    for i in range(len(self.alpha_t['C'])):
-        #        lines.append("{} {}".format(i, math.exp(self.alpha_t['C'][i])))
+        ##        lines.append("{} {}".format(i, math.exp(self.alpha_t['C'][i])))
         #    f.write("\n".join(lines))
 
         #with open('./alpha_t_h.log', 'w') as f:
@@ -311,6 +321,15 @@ class HMM:
         tag_d = self.tag_dict
         emission_p = self.emission_probs
 
+        # (EM) because of raw, we might have words that are in observations but have no tags for
+        # them yet. handled inside calc_state_prob because we want to keep the original word to
+        # update new_tag_dict after get_max_tag
+
+        if w_i not in tag_d and w_i != "###":
+            w_i = "<OOV>"
+        if prev_word not in tag_d and prev_word != "###":
+            prev_word = "<OOV>"
+
         # TODO: handle EOS
         if w_i == "###":
             # SOS
@@ -327,6 +346,7 @@ class HMM:
            
         # First word
         elif prev_word == '###':
+
             tags = tag_d[w_i]
             prev_tags = {'###'} # ### tags ###
 
@@ -350,15 +370,16 @@ class HMM:
             ### pseudocode line 13 for EM ###
             #
             #   Get estimated p(t_i | w_i). It is as if we observed the fractional counts (Hint from lecture slide 8)
-            #       p(t_i | w_i) = # t_i / # w_i 
-            #    hence reconstruct the counts of t_i by p(t_i | w_i) * #w_i
+            #       p(t_i | w_i) = #(t_i, w_i)  / # w_i 
+            #    hence reconstruct the counts of #(t_i, w_i)  by p(t_i | w_i) * #w_i
 
             if direction == "backward":
                 logprob_tw = self.alpha_t[t_i][i] + self.beta_t[t_i][i] - self.alpha_t['###'][-1]
                 prob_tw = math.exp(logprob_tw)
-                estimated_tag_counts = prob_tw * self.raw_word_counts[w_i]
-                self.new_emission_counts = self.add_count(estimated_tag_counts, t_i, w_i,\
-                        self.new_emission_counts)
+                #prob_tw = prob_tw * self.raw_word_counts[w_i]
+                # we want c(t, w)
+                self.new_emission_counts = self.add_count(prob_tw, t_i, w_i,\
+                         self.new_emission_counts)
 
             ### End of Pseudocode line 13 for EM Emission Counts ###
 
@@ -372,41 +393,35 @@ class HMM:
                         self.mu_t[t_i][i] = mu
                         self.back_t[t_i][i] = t_im1
                     
+                    # log sum exponentials as explained on R-10
                     state_p[t_i][i] = np.logaddexp(state_p[t_i][i], mu)
 
                 if direction == "backward":
 
-                    if prev_word=="###":
-                        p = math.log(self.transition_probs[t_im1][t_i])
-                    else:
-                        p = math.log(self.transition_probs[t_im1][t_i])\
-                        + math.log(emission_p[t_i][w_i])
+                    p = math.log(self.transition_probs[t_im1][t_i])\
+                    + math.log(emission_p[t_i][w_i])
                     
                     mu = state_p[t_i][i] + p
 
+                    # log sum exponentials as explained on R-10
                     state_p[t_im1][i-1] = np.logaddexp(state_p[t_im1][i-1], mu)
 
-                    #print(i, t_im1, t_i, w_i, p)
-                
-
-                # Cannot just add log probs here. 
-                # we need to do log sum exponentials as explained on R-10
                 
                 ### Pseudocode line 17 for EM ###
-                #
                 #   Get estimated p(t_i-1, t_i | w_i). 
-                #       p(t_i, t_i-1 | w_i ) = (# t_i, t_i-1) / # w_i
+                #       p(t_i, t_im1 | w_i ) = c(t_i, t_im1, w_i) / c(w_i)
+                #       c(t_im1, t1) = \sum_w c(t_i, t_im1, w_i)
                 #
-                #   Reconstruct counts of by p(t_i, t_i-1 | w_i ) * #w_i
+                #   we want c(t_im1, t1)  so just sum over all p(t_i, t_im1 |w_i)?
 
                 if direction == "backward":
                     logprob_tt = p + self.alpha_t[t_im1][i-1] + self.beta_t[t_i][i] - self.alpha_t['###'][-1]
 
-                    prob_tt = math.exp(logprob_tt)
-                    estimated_tt_counts = prob_tt * self.raw_word_counts[w_i]
-                    self.new_transition_counts = self.add_count(estimated_tt_counts, t_im1, \
+                    prob_tt = math.exp(logprob_tt) 
+                    #prob_tt = prob_tt * self.raw_word_counts[w_i]
+                    self.new_transition_counts = self.add_count(prob_tt, t_im1, \
                             t_i, self.new_transition_counts)
-
+                    
             ### End of Pseudocode line 17 for EM Transition Counts ###
 
 
@@ -421,8 +436,13 @@ class HMM:
         max_tag = None
 
         #for tag in self.org_tag_dict[w_i]:
-        for tag in tag_d[w_i]:
-            #predicted_tag_score = self.alpha_t[tag][-i-1] + self.beta_t[tag][i]
+        # because of raw, we may have words that are not in tag_d yet.
+        if w_i not in tag_d:
+            tags = tag_d['<OOV>']
+        else:
+            tags = tag_d[w_i]
+
+        for tag in tags:
             predicted_tag_score = self.alpha_t[tag][i] + self.beta_t[tag][i]
             
             # Line 13 of pseudocode normalises but there is no need to normalise since we are
@@ -434,6 +454,13 @@ class HMM:
 
         if max_tag is None:
             max_tag = 'N'
+
+        # Update new tag dict
+        if w_i not in self.new_tag_dict.keys():
+            self.new_tag_dict[w_i] = set()
+        self.new_tag_dict[w_i].add(tag)
+
+
         return max_tag
 
 
@@ -506,35 +533,11 @@ class HMM:
         # 
         # self.alpha_t['###'] should contain the sum of alpha_t
         perplexity = math.exp( - crossentropy / (len(self.testlines)-1))
-        print("Model perplexity per tagged test word:", perplexity)
+        #print("Model perplexity per tagged test word:", perplexity)
         print("Tagging accuracy (Viterbi decoding): {0:.2f}%\t(known: {1:.2f}% novel: {2:.2f}%)".format(\
                 viterbi_eval[0]*100, viterbi_eval[1]*100, viterbi_eval[2]*100))
         print("Tagging accuracy (posterior decoding): {0:.2f}%\t(known: {1:.2f}% novel: {2:.2f}%)".format(\
                 posterior_eval[0]*100, posterior_eval[1]*100, posterior_eval[2]*100))
-
-        with open('./alpha_t_c.log', 'w') as f:
-            lines = []
-            for i in range(len(self.alpha_t['C'])):
-                lines.append("{} {}".format(i, math.exp(self.alpha_t['C'][i])))
-            f.write("\n".join(lines))
-
-        with open('./alpha_t_h.log', 'w') as f:
-            lines = []
-            for i in range(len(self.alpha_t['H'])):
-                lines.append("{} {}".format(i, math.exp(self.alpha_t['H'][i])))
-            f.write("\n".join(lines))
-
-        with open('./beta_t_h.log', 'w') as f:
-            lines = []
-            for i in range(len(self.beta_t['H'])):
-                lines.append("{} {}".format(i, math.exp(self.beta_t['H'][::-1][i])))
-            f.write("\n".join(lines))
-
-        with open('./beta_t_c.log', 'w') as f:
-            lines = []
-            for i in range(len(self.beta_t['C'])):
-                lines.append("{} {}".format(i, math.exp(self.beta_t['C'][::-1][i])))
-            f.write("\n".join(lines))
 
 
     def forward_backward(self, words=None):
@@ -562,25 +565,29 @@ class HMM:
             self.alpha_t[state] = []
             self.beta_t[state] = []
 
-            for i in range(len(self.testlines)):
+            for i in range(len(words)):
                 self.alpha_t[state].append(float('-inf'))
                 self.beta_t[state].append(float('-inf'))
 
         self.alpha_t['###'][0] = math.log(1)
-        self.beta_t['###'][len(self.testlines)-1] = math.log(1)
+        self.beta_t['###'][len(words)-1] = math.log(1)
             
        
         # forward pass
         for i in range(1, len(words)):
+
             w_i = words[i]
             prev_word = words[i-1]
+            
             if w_i not in self.observations:
-            #    known[i] = False
                 w_i = "<OOV>"
+            if prev_word not in self.observations:
+                prev_word = "<OOV>"
 
-            if i > 0:
-                crossentropy += math.log(self.transition_probs[self.true_tags[i-1]][self.true_tags[i]]) \
-                    + math.log(self.emission_probs[self.true_tags[i]][w_i])
+            # Fix this later
+            #if i > 0:
+            #    crossentropy += math.log(self.transition_probs[self.true_tags[i-1]][self.true_tags[i]]) \
+            #        + math.log(self.emission_probs[self.true_tags[i]][w_i])
 
             self.calc_state_probs(i, w_i, prev_word, direction="forward")
 
@@ -595,9 +602,12 @@ class HMM:
 
             if w_i not in self.observations:
                 w_i = "<OOV>"
+            if prev_word not in self.observations:
+                prev_word = "<OOV>"
             
             self.calc_state_probs(i, w_i, prev_word, direction="backward")
             predicted_tags.append(self.get_max_tag(i, w_i))
+
 
         predicted_tags.append('###')
         tags = predicted_tags[::-1]
