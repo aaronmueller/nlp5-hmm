@@ -2,7 +2,7 @@
 # Author: Suzanna Sia
 
 import sys
-import vtagem
+import vtagem_cz
 import pdb
 
 numIterations = 10

@@ -103,7 +103,7 @@ due/J
 to/T
 the/D
 drug/N
-lords/N
+lords/I
 '/P
 history/N
 of/I
@@ -452,7 +452,7 @@ an/D
 apparent/J
 warning/N
 to/T
-currency/V
+currency/N
 traders/N
 who/W
 have/V
@@ -742,7 +742,7 @@ months/N
 ###/###
 Meanwhile/R
 ,/,
-average/N
+average/J
 earnings/N
 in/I
 Britain/N
@@ -1297,7 +1297,7 @@ products/N
 will/M
 begin/V
 to/T
-bear/V
+bear/N
 fruit/N
 with/I
 an/D
@@ -1740,7 +1740,7 @@ rate/N
 will/M
 rise/V
 to/T
-7.65/V
+7.65/N
 %/N
 in/I
 1990/C
@@ -2125,7 +2125,7 @@ $/$
 billion/C
 ./.
 ###/###
-Baxter/N
+Baxter/D
 International/N
 Inc./N
 yesterday/N
@@ -2316,7 +2316,7 @@ costs/N
 will/M
 continue/V
 to/T
-bedevil/V
+bedevil/N
 companies/N
 '/P
 bottom/N
@@ -2543,7 +2543,7 @@ restructurings/N
 ./.
 ###/###
 Humana/N
-'s/P
+'s/V
 revenues/N
 ,/,
 for/I
@@ -3807,7 +3807,7 @@ company/N
 ''/'
 ###/###
 Colgate/N
-'s/P
+'s/V
 results/N
 were/V
 at/I
@@ -4571,7 +4571,7 @@ and/C
 is/V
 committed/V
 to/T
-20%-a-year/V
+20%-a-year/N
 earnings/N
 growth/N
 ,/,
@@ -5488,7 +5488,7 @@ commonplace/N
 that/I
 fees/N
 they/P
-can/N
+can/M
 charge/N
 have/V
 plunged/N
@@ -5531,7 +5531,7 @@ free/J
 ``/`
 It/P
 's/V
-like/I
+like/V
 getting/V
 a/D
 free/J
@@ -5775,7 +5775,7 @@ clients/N
 ./.
 ''/'
 ###/###
-Big/N
+Big/J
 indexer/N
 Bankers/N
 Trust/N
@@ -6062,7 +6062,7 @@ buy/V
 S&P/N
 500/C
 options/N
-that/I
+that/W
 will/M
 nearly/R
 match/V
@@ -6308,7 +6308,7 @@ companies/N
 doing/V
 business/N
 in/I
-South/N
+South/J
 Africa/N
 ./.
 ###/###
@@ -6356,7 +6356,7 @@ of/I
 companies/N
 that/I
 are/V
-either/D
+either/R
 Pennsylvania-based/J
 or/C
 have/V
@@ -6416,7 +6416,7 @@ short/J
 interest/N
 dropped/V
 to/T
-523,920,214/V
+523,920,214/N
 shares/N
 as/I
 of/I
@@ -6436,7 +6436,7 @@ climbed/V
 3/C
 %/N
 to/T
-53,496,665/V
+53,496,665/N
 shares/N
 from/I
 51,911,566/N
@@ -6810,7 +6810,7 @@ Machines/N
 Corp./N
 plunged/N
 to/T
-1,425,035/V
+1,425,035/N
 shares/N
 from/I
 2,387,226/N
@@ -6832,7 +6832,7 @@ short/J
 interest/N
 slid/N
 to/T
-4,469,167/V
+4,469,167/N
 shares/N
 from/I
 5,088,774/N
@@ -6852,7 +6852,7 @@ gainers/N
 ,/,
 leaping/N
 to/T
-67,972/V
+67,972/N
 shares/N
 from/I
 three/C
@@ -6869,7 +6869,7 @@ decliners/N
 ,/,
 dropping/N
 to/T
-59/V
+59/N
 shares/N
 from/I
 183,467/N
@@ -6889,7 +6889,7 @@ Corp./N
 ,/,
 rising/V
 to/T
-3,820,634/V
+3,820,634/N
 shares/N
 from/I
 3,363,949/N
@@ -6988,7 +6988,7 @@ increases/N
 ,/,
 rising/V
 to/T
-73,100/V
+73,100/N
 shares/N
 from/I
 184/N
@@ -9325,7 +9325,7 @@ said/V
 Standard/N
 &/C
 Poor/N
-'s/P
+'s/V
 Corp./N
 is/V
 reviewing/V
@@ -9400,7 +9400,7 @@ Loan/N
 ./.
 ###/###
 Moody/N
-'s/P
+'s/V
 Investors/N
 Service/N
 Inc./N
@@ -9880,7 +9880,7 @@ heavily/V
 reflected/V
 a/D
 rapid/N
-change/N
+change/V
 in/I
 graphics/N
 technology/N
@@ -10766,7 +10766,7 @@ in/I
 September/N
 ./.
 ###/###
-American/N
+American/J
 Express/N
 Co./N
 posted/V
@@ -10997,7 +10997,7 @@ Services/N
 Co/N
 ./.
 ###/###
-American/N
+American/J
 Express/N
 card/N
 charge/N
@@ -11080,7 +11080,7 @@ $/$
 million/C
 ./.
 ###/###
-American/N
+American/J
 Express/N
 Bank/N
 earnings/N
@@ -11194,7 +11194,7 @@ management/N
 business/N
 ./.
 ###/###
-American/N
+American/J
 Express/N
 's/V
 share/N
@@ -12480,7 +12480,7 @@ compounded/N
 yield/N
 fell/V
 to/T
-8.55/V
+8.55/N
 %/N
 from/I
 8.60/N
@@ -12510,7 +12510,7 @@ average/J
 yield/N
 fell/V
 to/T
-7.61/V
+7.61/N
 %/N
 from/I
 7.82/N
@@ -13030,7 +13030,7 @@ million/C
 loan/N
 to/T
 Malaysia/V
-'s/P
+'s/V
 dominant/J
 political/J
 party/N
@@ -13428,7 +13428,7 @@ that/I
 it/P
 used/V
 to/T
-torment/V
+torment/N
 Democrats/N
 in/I
 the/D
@@ -13788,7 +13788,7 @@ by/I
 56/N
 %/N
 to/T
-39/V
+39/N
 %/N
 over/I
 Michael/N
@@ -13944,7 +13944,7 @@ Newark/N
 's/V
 Columbus/N
 Day/N
-parade/N
+parade/V
 recently/R
 ,/,
 he/P
@@ -14765,7 +14765,7 @@ in/I
 His/P
 base/N
 in/I
-South/N
+South/J
 Jersey/N
 and/C
 on/I
@@ -15311,7 +15311,7 @@ transportation/N
 and/C
 helping/V
 to/T
-ease/V
+ease/N
 housing/N
 costs/N
 ./.
@@ -15353,7 +15353,7 @@ news/N
 ,/,
 closing/V
 39.55/N
-points/V
+points/N
 higher/R
 at/I
 2683.20/N
@@ -15739,7 +15739,7 @@ rate/N
 back/N
 down/I
 to/T
-4.4/V
+4.4/N
 %/N
 ./.
 ###/###
@@ -15753,7 +15753,7 @@ competition/N
 will/M
 continue/V
 to/T
-restrain/V
+restrain/N
 prices/N
 ./.
 ###/###
@@ -15803,7 +15803,7 @@ capacity/N
 ,/,
 so/I
 businesses/N
-felt/N
+felt/I
 they/P
 could/M
 raise/V
@@ -16053,7 +16053,7 @@ to/T
 offer/V
 rebates/N
 to/T
-attract/V
+attract/N
 customers/N
 ./.
 ###/###
@@ -17025,7 +17025,7 @@ may/M
 be/V
 tough/J
 to/T
-attract/V
+attract/N
 people/N
 because/I
 skiing/N
@@ -17099,7 +17099,7 @@ sports/N
 as/I
 opposed/N
 to/T
-69/V
+69/N
 %/N
 who/W
 think/V
@@ -17553,7 +17553,7 @@ asking/V
 how/W
 they/P
 ``/`
-feel/N
+feel/V
 ''/'
 about/I
 one/C
@@ -17610,7 +17610,7 @@ she/P
 saw/V
 the/D
 park/N
-'s/P
+'s/V
 light/V
 standards/N
 sway/N
@@ -19531,7 +19531,7 @@ announcements/N
 ./.
 ###/###
 Harley-Davidson/N
-'s/P
+'s/V
 complaint/N
 claims/N
 that/I
@@ -21043,7 +21043,7 @@ Were/N
 we/P
 smart/N
 or/C
-just/J
+just/R
 lucky/N
 ?/.
 ###/###
@@ -22448,7 +22448,7 @@ of/I
 the/D
 stock/N
 market/N
-'s/P
+'s/V
 gains/N
 over/I
 time/N
@@ -22627,7 +22627,7 @@ reliably/V
 be/V
 used/V
 to/T
-guide/V
+guide/N
 investors/N
 in/I
 timing/N
@@ -23511,7 +23511,7 @@ best/J
 ./.
 ###/###
 To/T
-lure/V
+lure/N
 buyers/N
 to/T
 the/D
@@ -23847,7 +23847,7 @@ trading/N
 operation/N
 designed/V
 to/T
-drain/V
+drain/N
 reserves/N
 from/I
 the/D
@@ -23934,7 +23934,7 @@ did/V
 four-day/J
 matched/N
 sales/N
-means/N
+means/I
 they/P
 are/V
 not/R
@@ -24043,7 +24043,7 @@ Treasury/N
 bills/N
 rose/V
 to/T
-7.56/V
+7.56/N
 %/N
 from/I
 7.51/N
@@ -24058,7 +24058,7 @@ six-month/N
 bills/N
 rose/V
 to/T
-7.57/V
+7.57/N
 %/N
 from/I
 7.53/N
@@ -24147,7 +24147,7 @@ bidding/N
 narrows/I
 the/D
 investor/N
-'s/P
+'s/V
 return/N
 while/I
 lower/J
@@ -24376,7 +24376,7 @@ maturity/N
 range/N
 unchanged/N
 to/T
-0.05/V
+0.05/N
 percentage/N
 point/V
 higher/R
