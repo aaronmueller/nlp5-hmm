@@ -151,6 +151,7 @@ class HMM:
         self.test_words = []
 
         self.known = [True] * len(self.testlines)
+        self.seen = [False] * len(self.testlines)
 
         for i in range(len(self.testlines)):
             line = self.testlines[i]
@@ -158,13 +159,15 @@ class HMM:
 
             if w_i not in self.org_observations:
                 self.known[i] = False
+                if w_i in self.new_observations:
+                    self.seen[i] = True
 
             self.true_tags.append(tag)
             self.test_words.append(w_i)
 
+
     def collect_raw_statistics(self):
         self.raw_words = []
-
         
         for i in range(len(self.rawlines)):
             w_i = self.rawlines[i].strip()
@@ -215,6 +218,7 @@ class HMM:
                     count = self.new_transition_counts[prev][curr]
                     #* self.raw_word_counts[]
                     # add count function handles self.new items
+                    #self.transition_counts[prev][curr] = count
                     self.transition_counts = self.add_count(count, prev, curr,
                             self.transition_counts)
                     
@@ -223,6 +227,7 @@ class HMM:
             for tag in self.new_emission_counts.keys():
                 for word in self.new_emission_counts[tag].keys():
                     count = self.new_emission_counts[tag][word]
+                    #self.emission_counts[tag][word] = count
                     # add count function handles self.new items
                     self.emission_counts = self.add_count(count, tag, word, self.emission_counts)
 
@@ -252,11 +257,12 @@ class HMM:
             self.emission_probs[tag]['<OOV>'] = \
                 float(self.state_counts[tag]) / tag_total
 
+        #print(self.transition_probs)
+        #print(self.emission_probs)
 
     def doEStep(self):
 
         # Reset all counts before forward_backward
-        print("Reset counts")
         self.new_transition_counts = {}
         self.new_emission_counts = {}
         self.new_state_counts = defaultdict(int)
@@ -265,9 +271,9 @@ class HMM:
         # Now do forward-backward to accumulate counts again
         predicted_tags, crossentropy = self.forward_backward(words=self.raw_words)
 
-        print("(EM) Perplexity per untagged raw word: {0:.3f}".format(\
-                math.exp(-self.alpha_t['###'][len(self.raw_words)-1]/len(self.raw_words))))
-
+        print("Model perplexity per untagged raw word: {0:.3f}".format(\
+                math.exp(-self.alpha_t['###'][len(self.raw_words)-1]/(len(self.raw_words)-1))))
+        
         ### Sanity check ###
         # 1) Check sum_t alpha_t[t][i] * beta_t[i][i] is constant
         sanity_check = {}
@@ -464,12 +470,15 @@ class HMM:
         return max_tag
 
 
-    def evaluate(self, pred_tags, true_tags, known):
+    def evaluate(self, pred_tags, true_tags, known, seen):
         correct = 0
         total = 0
         known_total = 0
         known_correct = 0
-        unknown_correct = 0
+        seen_total = 0
+        seen_correct = 0
+        novel_total = 0
+        novel_correct = 0
 
         wrong_tags = []
 
@@ -480,25 +489,36 @@ class HMM:
                 if known[i] == True:
                     known_total += 1
                     known_correct += 1
+                elif seen[i] == True:
+                    seen_total += 1
+                    seen_correct += 1
                 else:
-                    unknown_correct += 1
+                    novel_correct += 1
+                    novel_total += 1
             elif true_tags[i] != "###":
                 total += 1
                 if known[i] == True:
                     known_total += 1
+                elif seen[i] == True:
+                    seen_total += 1
+                else:
+                    novel_total += 1
 
                 wrong_tags.append(true_tags[i])
 
-        unknown_total = total - known_total
         accuracy = float(correct) / total
         known_accuracy = float(known_correct) / known_total
-        if unknown_total > 0:
-            unknown_accuracy = float(unknown_correct) / unknown_total
+        if seen_total > 0:
+            seen_accuracy = float(seen_correct) / seen_total
         else:
             unknown_accuracy = 0
+        if novel_total > 0:
+            novel_accuracy = float(novel_correct) / novel_total
+        else:
+            novel_accuracy = 0
 
-        print("Wrongly tagged:", Counter(wrong_tags))
-        return (accuracy, known_accuracy, unknown_accuracy)
+        print("# Wrongly tagged:", Counter(wrong_tags))
+        return (accuracy, known_accuracy, seen_accuracy, novel_accuracy)
 
 
     def test_and_eval(self):
@@ -516,28 +536,27 @@ class HMM:
         for i in range(n, -1, -1):
             viterbi_tags[i-1] = self.back_t[viterbi_tags[i]][i]
         
-        viterbi_eval = self.evaluate(viterbi_tags, self.true_tags, self.known)
- 
-        # Write test output
-        #
+        viterbi_eval = self.evaluate(viterbi_tags, self.true_tags, self.known, self.seen)
+
+        # evaluate posterior decoding
+        posterior_eval = self.evaluate(predicted_tags, self.true_tags, self.known, self.seen)
+        
+        # write output
         with open('test-output', 'w') as out_f:
             for i, word in enumerate(self.test_words):
                 out_f.write(word+'/'+predicted_tags[i]+'\n')
 
-
-        # evaluate posterior decoding
-        posterior_eval = self.evaluate(predicted_tags, self.true_tags, self.known)
-        
         # Calculate perplexity at the end of forwardpass
         # length -1 because of ###/### at SOS
         # 
         # self.alpha_t['###'] should contain the sum of alpha_t
-        perplexity = math.exp( - crossentropy / (len(self.testlines)-1))
-        #print("Model perplexity per tagged test word:", perplexity)
-        print("Tagging accuracy (Viterbi decoding): {0:.2f}%\t(known: {1:.2f}% novel: {2:.2f}%)".format(\
-                viterbi_eval[0]*100, viterbi_eval[1]*100, viterbi_eval[2]*100))
-        print("Tagging accuracy (posterior decoding): {0:.2f}%\t(known: {1:.2f}% novel: {2:.2f}%)".format(\
-                posterior_eval[0]*100, posterior_eval[1]*100, posterior_eval[2]*100))
+        # perplexity = math.exp( - crossentropy / (len(self.testlines)-1))
+        print("Model perplexity per tagged test word: {0:.3f}".format(\
+                math.exp(-self.alpha_t['###'][len(self.test_words)-1]/(len(self.test_words)-1))))
+        print("Tagging accuracy (Viterbi decoding): {0:.2f}% (known: {1:.2f}% seen: {2:.2f}% novel: {3:.2f}%)".format(\
+                viterbi_eval[0]*100, viterbi_eval[1]*100, viterbi_eval[2]*100, viterbi_eval[3]*100))
+        print("# Tagging accuracy (posterior decoding): {0:.2f}% (known: {1:.2f}% seen: {2:.2f}% novel: {3:.2f}%)\n#".format(\
+                posterior_eval[0]*100, posterior_eval[1]*100, posterior_eval[2]*100, posterior_eval[3]*100))
 
 
     def forward_backward(self, words=None):
