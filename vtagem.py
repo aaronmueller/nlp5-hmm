@@ -16,7 +16,7 @@ import math
 class HMM:
     def __init__(self, train_file, raw_file, test_file):
 
-        self.lamda = 1
+        self.lamda = 0.05
 
         self.states = set()
         self.observations = set()
@@ -50,13 +50,13 @@ class HMM:
         self.mu_t = {}
         self.back_t = {}
 
-        with open(train_file, 'r') as f:
+        with open(train_file, 'r', encoding='utf-8', errors='replace') as f:
             self.trainlines = f.readlines()
 
-        with open(raw_file, 'r') as f:
+        with open(raw_file, 'r', encoding='utf=8', errors='replace') as f:
             self.rawlines = f.readlines()
 
-        with open(test_file, 'r') as f:
+        with open(test_file, 'r', encoding='utf-8', errors='replace') as f:
             self.testlines = f.readlines()
 
 
@@ -551,11 +551,22 @@ class HMM:
         # 
         # self.alpha_t['###'] should contain the sum of alpha_t
         # perplexity = math.exp( - crossentropy / (len(self.testlines)-1))
+        crossentropy = 0
+        for i in range(1, len(self.testlines)):
+            prev_word, prev_tag = self.testlines[i-1].strip().split('/')
+            word, tag = self.testlines[i].strip().split('/')
+            if prev_word not in self.observations:
+                prev_word = '<OOV>'
+            if word not in self.observations:
+                word = '<OOV>'
+            crossentropy += math.log(self.transition_probs[prev_tag][tag]) \
+                    + math.log(self.emission_probs[tag][word])
+
         print("Model perplexity per tagged test word: {0:.3f}".format(\
-                math.exp(-self.alpha_t['###'][len(self.test_words)-1]/(len(self.test_words)-1))))
+                math.exp(-crossentropy/(len(self.test_words)-1))))
         print("Tagging accuracy (Viterbi decoding): {0:.2f}% (known: {1:.2f}% seen: {2:.2f}% novel: {3:.2f}%)".format(\
                 viterbi_eval[0]*100, viterbi_eval[1]*100, viterbi_eval[2]*100, viterbi_eval[3]*100))
-        print("# Tagging accuracy (posterior decoding): {0:.2f}% (known: {1:.2f}% seen: {2:.2f}% novel: {3:.2f}%)\n#".format(\
+        print("Tagging accuracy (posterior decoding): {0:.2f}% (known: {1:.2f}% seen: {2:.2f}% novel: {3:.2f}%)\n#".format(\
                 posterior_eval[0]*100, posterior_eval[1]*100, posterior_eval[2]*100, posterior_eval[3]*100))
 
 
@@ -603,7 +614,6 @@ class HMM:
             if prev_word not in self.observations:
                 prev_word = "<OOV>"
 
-            # Fix this later
             #if i > 0:
             #    crossentropy += math.log(self.transition_probs[self.true_tags[i-1]][self.true_tags[i]]) \
             #        + math.log(self.emission_probs[self.true_tags[i]][w_i])
@@ -630,6 +640,7 @@ class HMM:
 
         predicted_tags.append('###')
         tags = predicted_tags[::-1]
+        
         return tags, crossentropy
 
 
