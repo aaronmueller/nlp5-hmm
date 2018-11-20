@@ -91,7 +91,7 @@ class HMM:
             
             SOS = False
 
-            lamda = 1
+            lamda = 0.05
             self.observations.add('<NUM>')
             self.observations.add('<OOV>')
             self.tag_dict['<OOV>'] = set()
@@ -317,7 +317,7 @@ class HMM:
         else:
             unknown_accuracy = 0
 
-        print("Wrongly tagged:", Counter(wrong_tags))
+        #print("Wrongly tagged:", Counter(wrong_tags))
         return (accuracy, known_accuracy, unknown_accuracy)
 
 

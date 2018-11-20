@@ -72,7 +72,7 @@ traffickers/N
 not/R
 the/D
 left/V
-wing/V
+wing/N
 ./.
 ###/###
 This/D
@@ -257,7 +257,7 @@ of/I
 quality/N
 assurance/N
 ;/:
-most/J
+most/R
 recently/R
 ,/,
 he/P
@@ -287,7 +287,7 @@ operations/N
 ;/:
 he/P
 was/V
-assistant/N
+assistant/J
 vice/N
 president/N
 at/I
@@ -378,7 +378,7 @@ instrument/N
 ''/'
 to/T
 carry/V
-out/I
+out/R
 the/D
 campaign/N
 ./.
@@ -386,7 +386,7 @@ campaign/N
 Two/C
 weeks/N
 after/I
-boosting/N
+boosting/V
 base/N
 rates/N
 to/T
@@ -499,8 +499,8 @@ to/T
 fight/V
 inflation/N
 and/C
-shore/N
-up/I
+shore/V
+up/R
 the/D
 pound/N
 ,/,
@@ -548,8 +548,8 @@ dismissed/V
 the/D
 possibility/N
 of/I
-imposing/V
-direct/V
+imposing/N
+direct/J
 credit/N
 controls/N
 on/I
@@ -747,7 +747,7 @@ earnings/N
 in/I
 Britain/N
 were/V
-up/I
+up/R
 8.75/C
 %/N
 in/I
@@ -770,7 +770,7 @@ building-society/N
 lending/N
 to/T
 a/D
-record/N
+record/J
 #/#
 10.2/C
 billion/C
@@ -831,7 +831,7 @@ British/N
 economy/N
 was/V
 heating/V
-up/I
+up/R
 last/J
 year/N
 ./.
@@ -840,7 +840,7 @@ He/P
 added/V
 that/I
 ``/`
-there/R
+there/E
 's/V
 no/D
 quick-fix/N
@@ -952,7 +952,7 @@ Specifically/R
 ,/,
 he/P
 pointed/V
-out/I
+out/R
 that/I
 compared/V
 with/I
@@ -978,7 +978,7 @@ arrangements/N
 ,/,
 Mr./N
 Lawson/N
-repeated/V
+repeated/J
 the/D
 Thatcher/N
 government/N
@@ -1089,7 +1089,7 @@ it/P
 wo/M
 n't/R
 start/V
-shipping/N
+shipping/V
 the/D
 computers/N
 until/I
@@ -1156,7 +1156,7 @@ chip/N
 ``/`
 is/V
 a/D
-very/J
+very/R
 big/J
 step/N
 in/I
@@ -1210,7 +1210,7 @@ steadily/R
 sliding/V
 over/I
 the/D
-past/N
+past/J
 couple/N
 of/I
 years/N
@@ -1303,7 +1303,7 @@ with/I
 an/D
 earnings/N
 rebound/N
-next/I
+next/J
 year/N
 ,/,
 especially/R
@@ -1435,7 +1435,7 @@ around/I
 $/$
 16,250/C
 on/I
-average/N
+average/J
 in/I
 Europe/N
 ./.
@@ -1496,7 +1496,7 @@ unit/N
 which/W
 specializes/V
 in/I
-automating/N
+automating/V
 bank-branch/N
 networks/N
 ./.
@@ -1509,7 +1509,7 @@ received/V
 approval/N
 from/I
 the/D
-French/N
+French/J
 government/N
 for/I
 its/P
@@ -1593,7 +1593,7 @@ for/I
 the/D
 food/N
 and/C
-pharmaceutical/N
+pharmaceutical/J
 industries/N
 ./.
 ###/###
@@ -1629,7 +1629,7 @@ Department/N
 of/I
 Health/N
 and/C
-Human/N
+Human/J
 Services/N
 announced/V
 ./.
@@ -1759,7 +1759,7 @@ future/N
 ./.
 ###/###
 This/D
-means/N
+means/V
 that/I
 the/D
 maximum/N
@@ -1879,7 +1879,7 @@ houses/N
 are/V
 expected/V
 to/T
-report/N
+report/V
 earnings/N
 increases/N
 of/I
@@ -1887,7 +1887,7 @@ about/I
 15/C
 %/N
 on/I
-average/N
+average/J
 for/I
 the/D
 third/J
@@ -1995,12 +1995,12 @@ Co./N
 for/I
 example/N
 ,/,
-faces/N
+faces/V
 stiff/J
 competition/N
 from/I
 a/D
-Japanese/N
+Japanese/J
 supplier/N
 in/I
 the/D
@@ -2019,7 +2019,7 @@ company/N
 is/V
 expected/V
 to/T
-report/N
+report/V
 sales/N
 growth/N
 of/I
@@ -2068,7 +2068,7 @@ Abbott/N
 Laboratories/N
 said/V
 third-quarter/J
-net/N
+net/J
 income/N
 jumped/V
 14/C
@@ -2260,7 +2260,7 @@ full-year/J
 earnings/N
 may/M
 be/V
-off/I
+off/R
 33/C
 cents/N
 a/D
@@ -2454,7 +2454,7 @@ favorable/J
 results/N
 ,/,
 with/I
-net/N
+net/J
 income/N
 of/I
 $/$
@@ -2574,7 +2574,7 @@ an/D
 analyst/N
 with/I
 Dean/N
-Witter/N
+Witter/J
 Reynolds/V
 :/:
 ``/`
@@ -2668,7 +2668,7 @@ was/V
 %/N
 ./.
 ###/###
-Counting/N
+Counting/V
 all/P
 state/N
 and/C
@@ -2776,7 +2776,7 @@ a/D
 %/N
 decline/N
 in/I
-net/N
+net/J
 income/N
 on/I
 a/D
@@ -2814,7 +2814,7 @@ Wall/N
 Street/N
 for/I
 a/D
-poor/N
+poor/J
 quarter/N
 ,/,
 analysts/N
@@ -3105,7 +3105,7 @@ backdrop/N
 of/I
 a/D
 nearly/R
-40-point/N
+40-point/J
 rise/N
 in/I
 the/D
@@ -3114,7 +3114,7 @@ Jones/N
 Industrial/N
 Average/N
 ,/,
-that/I
+that/W
 should/M
 n't/R
 necessarily/R
@@ -3169,7 +3169,7 @@ Boston/N
 ./.
 ###/###
 ``/`
-Margins/N
+Margins/V
 will/M
 remain/V
 under/I
@@ -3254,7 +3254,7 @@ Europe/N
 DEC/N
 said/V
 its/P
-overseas/N
+overseas/R
 business/N
 ,/,
 which/W
@@ -3403,7 +3403,7 @@ DEC/N
 drew/V
 down/R
 its/P
-European/N
+European/J
 backlog/N
 ''/'
 and/C
@@ -3544,7 +3544,7 @@ Palmolive/V
 Co./N
 reported/V
 third-quarter/J
-net/N
+net/J
 income/N
 rose/V
 27/C
@@ -3695,7 +3695,7 @@ he/P
 said/V
 ./.
 ###/###
-Operating/N
+Operating/V
 profit/N
 at/I
 Colgate/N
@@ -3738,7 +3738,7 @@ attributed/V
 the/D
 improvement/N
 to/T
-cost/N
+cost/V
 savings/N
 achieved/V
 by/I
@@ -3926,7 +3926,7 @@ period/N
 Colgate/N
 's/P
 1988/C
-net/N
+net/J
 income/N
 included/V
 $/$
@@ -3962,7 +3962,7 @@ Separately/R
 ,/,
 Colgate/N
 Wednesday/N
-finalized/V
+finalized/J
 an/D
 agreement/N
 with/I
@@ -3974,7 +3974,7 @@ tiny/J
 dental/N
 products/N
 and/C
-pharmaceutical/N
+pharmaceutical/J
 concern/N
 based/V
 in/I
@@ -4001,7 +4001,7 @@ products/N
 --/:
 sealants/N
 and/C
-bonding/N
+bonding/V
 materials/N
 used/V
 by/I
@@ -4258,7 +4258,7 @@ that/I
 have/V
 offered/V
 retirement/N
-plans/N
+plans/V
 ,/,
 it/P
 expects/V
@@ -4279,7 +4279,7 @@ program/N
 AT&T/N
 said/V
 third-quarter/J
-net/N
+net/J
 income/N
 grew/V
 ,/,
@@ -4341,7 +4341,7 @@ period/N
 's/P
 net/J
 was/V
-reduced/V
+reduced/J
 $/$
 102/C
 million/C
@@ -4359,7 +4359,7 @@ in/I
 depreciation/N
 method/N
 and/C
-concurrent/N
+concurrent/J
 changes/N
 in/I
 estimates/N
@@ -4545,7 +4545,7 @@ said/V
 had/V
 been/V
 the/D
-subject/N
+subject/J
 of/I
 rumors/N
 for/I
@@ -4693,7 +4693,7 @@ special/J
 retirement/N
 option/N
 will/M
-increase/N
+increase/V
 fourth-quarter/J
 expenses/N
 ./.
@@ -4781,7 +4781,7 @@ $/$
 a/D
 share/N
 ,/,
-up/I
+up/R
 19/C
 %/N
 from/I
@@ -4828,7 +4828,7 @@ at/I
 $/$
 43.375/C
 ,/,
-up/I
+up/R
 87.5/C
 cents/N
 ./.
@@ -5055,8 +5055,8 @@ or/C
 other/J
 bellwethers/N
 ,/,
-much/J
-less/J
+much/R
+less/R
 beat/V
 it/P
 ./.
@@ -5139,7 +5139,7 @@ satisfied/V
 with/I
 merely/R
 being/V
-average/N
+average/J
 ,/,
 they/P
 have/V
@@ -5358,11 +5358,11 @@ of/I
 stock/N
 ,/,
 but/C
-can/N
+can/M
 produce/V
 returns/N
 that/I
-match/N
+match/V
 or/C
 exceed/V
 the/D
@@ -5436,7 +5436,7 @@ Co./N
 Chicago/N
 ,/,
 which/W
-offers/N
+offers/V
 both/D
 indexing/N
 and/C
@@ -5568,7 +5568,7 @@ something/N
 more/J
 than/I
 the/D
-average/N
+average/J
 for/I
 their/P
 money/N
@@ -5735,7 +5735,7 @@ and/C
 not/R
 stocks/N
 at/I
-all/D
+all/P
 ./.
 ###/###
 ``/`
@@ -5788,7 +5788,7 @@ a/D
 strategy/N
 that/I
 on/I
-average/N
+average/J
 has/V
 added/V
 one/C
@@ -5870,7 +5870,7 @@ saying/V
 that/I
 these/D
 instruments/N
-present/V
+present/R
 added/V
 risks/N
 for/I
@@ -5915,7 +5915,7 @@ Inc./N
 unit/N
 ./.
 ###/###
-Prudential/N
+Prudential/J
 currently/R
 is/V
 seeking/V
@@ -5957,7 +5957,7 @@ by/I
 Prudential/N
 ./.
 ###/###
-There/R
+There/E
 are/V
 many/J
 other/J
@@ -5990,7 +5990,7 @@ while/I
 still/R
 passing/V
 along/I
-most/J
+most/R
 gains/N
 ./.
 ###/###
@@ -6091,7 +6091,7 @@ stocks/N
 ###/###
 Instead/R
 of/I
-hiring/N
+hiring/V
 one/C
 of/I
 the/D
@@ -6233,7 +6233,7 @@ bankruptcy/N
 candidates/N
 ;/:
 this/D
-can/N
+can/M
 avoid/V
 weak/J
 sisters/N
@@ -6289,7 +6289,7 @@ stocks/N
 SPECIALIZED/N
 FUNDS/N
 :/:
-Indexes/N
+Indexes/V
 can/M
 be/V
 constructed/V
@@ -6343,7 +6343,7 @@ for/I
 example/N
 ,/,
 has/V
-about/I
+about/R
 $/$
 130/C
 million/C
@@ -6364,7 +6364,7 @@ have/V
 %/N
 of/I
 their/P
-work/N
+work/V
 forces/N
 in/I
 the/D
@@ -6514,7 +6514,7 @@ stock/N
 's/P
 price/N
 will/M
-decline/N
+decline/V
 and/C
 that/I
 they/P
@@ -6657,14 +6657,14 @@ average/N
 trading/N
 volume/N
 ,/,
-that/I
+that/W
 would/M
 be/V
 required/V
 to/T
 convert/V
 the/D
-total/N
+total/J
 short/J
 interest/N
 position/N
@@ -6763,7 +6763,7 @@ New/N
 York/N
 exchange/N
 ,/,
-up/I
+up/R
 3,383,477/C
 shares/N
 to/T
@@ -6920,7 +6920,7 @@ investigation/N
 concerning/V
 procedures/N
 to/T
-gain/N
+gain/V
 Food/N
 and/C
 Drug/N
@@ -6935,7 +6935,7 @@ Bolar/N
 has/V
 denied/V
 any/D
-wrongdoing/V
+wrongdoing/J
 ./.
 ###/###
 The/D
@@ -6943,7 +6943,7 @@ largest/J
 volume/N
 drop/N
 --/:
-down/I
+down/R
 445,645/C
 shares/N
 to/T
@@ -7143,7 +7143,7 @@ opinion/N
 polls/N
 ./.
 ###/###
-My/N
+My/P
 position/N
 is/V
 one/C
@@ -7163,7 +7163,7 @@ may/M
 have/V
 forgotten/V
 ,/,
-public/N
+public/J
 opinion/N
 about/I
 Gen./N
@@ -7921,7 +7921,7 @@ police/N
 accused/V
 him/P
 of/I
-stealing/N
+stealing/V
 electricity/N
 ,/,
 acquiring/V
@@ -7929,7 +7929,7 @@ rubber/N
 without/I
 permission/N
 and/C
-buying/N
+buying/V
 stolen/V
 property/N
 ./.
@@ -7963,11 +7963,11 @@ house/N
 and/C
 contents/N
 were/V
-confiscated/V
+confiscated/J
 ./.
 ###/###
 With/I
-only/J
+only/R
 the/D
 clothes/N
 they/P
@@ -7995,7 +7995,7 @@ six/C
 months/N
 on/I
 the/D
-run/N
+run/V
 ,/,
 Mr./N
 Chan/N
@@ -8242,7 +8242,7 @@ primitive/J
 operations/N
 also/R
 burst/V
-out/I
+out/R
 the/D
 back/R
 door/N
@@ -8323,7 +8323,7 @@ machines/N
 They/P
 did/V
 n't/R
-return/N
+return/V
 the/D
 rubber/N
 stocks/N
@@ -8346,7 +8346,7 @@ which/W
 he/P
 values/V
 at/I
-about/I
+about/R
 $/$
 44,000/C
 ./.
@@ -8409,7 +8409,7 @@ sixth/J
 congress/N
 ,/,
 journalists/N
-seized/V
+seized/J
 the/D
 opportunity/N
 provided/V
@@ -8555,7 +8555,7 @@ one/C
 night/N
 stormed/V
 through/I
-homes/N
+homes/V
 and/C
 confiscated/V
 rice/N
@@ -8999,7 +8999,7 @@ Actually/R
 Mrs./N
 Thi/N
 is/V
-about/I
+about/R
 as/I
 poor/J
 as/I
@@ -9066,7 +9066,7 @@ from/I
 farmers/N
 in/I
 the/D
-south/N
+south/J
 ,/,
 paying/V
 with/I
@@ -9180,7 +9180,7 @@ Bank/N
 ,/,
 and/C
 setting/V
-up/I
+up/R
 Saigon/N
 Petro/N
 ,/,
@@ -9212,7 +9212,7 @@ to/T
 the/D
 equivalent/N
 of/I
-about/I
+about/R
 $/$
 2.7/C
 million/C
@@ -9240,7 +9240,7 @@ She/P
 is/V
 almost/R
 cavalier/R
-about/I
+about/R
 the/D
 possibility/N
 Vietnam/N
@@ -9338,7 +9338,7 @@ counties/N
 ,/,
 and/C
 ``/`
-there/R
+there/E
 are/V
 potential/J
 isolated/V
@@ -9386,7 +9386,7 @@ far/R
 to/T
 be/V
 singled/V
-out/I
+out/R
 are/V
 those/D
 issued/V
@@ -9516,7 +9516,7 @@ Oct./N
 editorial/J
 ``/`
 A/D
-Democratic/N
+Democratic/J
 Tax/N
 Cut/N
 ''/'
@@ -9582,7 +9582,7 @@ nearly/R
 all/D
 of/I
 them/P
-belong/J
+belong/R
 ,/,
 has/V
 no/D
@@ -9600,7 +9600,7 @@ Banana/N
 Co/N
 ./.
 ###/###
-Western/N
+Western/J
 Digital/N
 Corp./N
 reported/V
@@ -9744,7 +9744,7 @@ quarter/N
 last/J
 year/N
 ,/,
-Western/N
+Western/J
 Digital/N
 earned/V
 $/$
@@ -9837,7 +9837,7 @@ he/P
 added/V
 ./.
 ###/###
-There/R
+There/E
 are/V
 no/D
 plans/V
@@ -9861,10 +9861,10 @@ to/T
 believe/V
 shareholders/N
 are/V
-best/J
+best/R
 served/V
 by/I
-reinvesting/N
+reinvesting/V
 excess/N
 cash/N
 ./.
@@ -9910,7 +9910,7 @@ graphics/N
 boards/N
 ./.
 ###/###
-Western/N
+Western/J
 Digital/N
 does/V
 n't/R
@@ -9935,12 +9935,12 @@ capabilities/N
 as/I
 standard/J
 equipment/N
-further/J
+further/R
 dampened/V
 reseller/J
 purchases/N
 of/I
-Western/N
+Western/J
 Digital/N
 's/P
 equipment/N
@@ -10001,7 +10001,7 @@ has/V
 a/D
 lower/J
 resolution/N
-standard/N
+standard/J
 ,/,
 technology/N
 and/C
@@ -10105,7 +10105,7 @@ reorganization/N
 this/D
 week/N
 ,/,
-Western/N
+Western/J
 Digital/N
 has/V
 divided/V
@@ -10264,7 +10264,7 @@ industry/N
 he/P
 said/V
 ,/,
-Western/N
+Western/J
 Digital/N
 is/V
 strengthening/V
@@ -10333,7 +10333,7 @@ AT&T/N
 About/I
 half/D
 of/I
-Western/N
+Western/J
 Digital/N
 's/P
 business/N
@@ -10374,11 +10374,11 @@ said/V
 ,/,
 particularly/R
 since/I
-Western/N
+Western/J
 Digital/N
 already/R
 manufactures/V
-there/R
+there/E
 ./.
 ###/###
 Capitalizing/V
@@ -10386,7 +10386,7 @@ on/I
 that/I
 presence/N
 ,/,
-Western/N
+Western/J
 Digital/N
 is/V
 launching/V
@@ -10428,7 +10428,7 @@ will/M
 help/V
 it/P
 operate/V
-more/J
+more/R
 like/I
 a/D
 private-sector/J
@@ -10583,7 +10583,7 @@ board/N
 representation/N
 be/V
 linked/V
-more/J
+more/R
 closely/R
 to/T
 the/D
@@ -10674,7 +10674,7 @@ August/N
 ,/,
 and/C
 was/V
-up/I
+up/R
 3.9/C
 %/N
 from/I
@@ -10730,7 +10730,7 @@ August/N
 the/D
 index/N
 was/V
-up/I
+up/R
 0.2/C
 %/N
 from/I
@@ -10740,7 +10740,7 @@ month/N
 ,/,
 and/C
 was/V
-up/I
+up/R
 4.5/C
 %/N
 on/I
@@ -10859,7 +10859,7 @@ from/I
 continuing/V
 operations/N
 was/V
-up/I
+up/R
 26/C
 %/N
 ./.
@@ -10971,7 +10971,7 @@ rose/V
 %/N
 to/T
 a/D
-record/N
+record/J
 $/$
 240.8/C
 million/C
@@ -11040,7 +11040,7 @@ rose/V
 %/N
 to/T
 a/D
-record/N
+record/J
 $/$
 47.6/C
 million/C
@@ -11164,7 +11164,7 @@ $/$
 65.9/C
 million/C
 ,/,
-reversing/N
+reversing/V
 a/D
 $/$
 3.5/C
@@ -11602,7 +11602,7 @@ quarter/N
 ,/,
 Textron/N
 said/V
-aerospace/N
+aerospace/J
 revenue/N
 ,/,
 including/V
@@ -11798,7 +11798,7 @@ the/D
 proposal/N
 jeopardizes/V
 a/D
-tentative/N
+tentative/J
 settlement/N
 he/P
 has/V
@@ -11833,7 +11833,7 @@ cases/N
 ./.
 ###/###
 The/D
-tentative/N
+tentative/J
 agreement/N
 between/I
 the/D
@@ -12082,7 +12082,7 @@ Hanover/I
 called/V
 it/P
 ``/`
-silly/N
+silly/J
 ''/'
 and/C
 said/V
@@ -12188,10 +12188,10 @@ in/I
 northern/J
 Ohio/N
 have/V
-total/N
+total/J
 assets/N
 of/I
-about/I
+about/R
 $/$
 88/C
 million/C
@@ -12296,7 +12296,7 @@ money-market/N
 mutual/J
 fund/N
 assets/N
-up/I
+up/R
 $/$
 6.07/C
 billion/C
@@ -12325,7 +12325,7 @@ Company/N
 Institute/N
 ,/,
 a/D
-Washington-based/V
+Washington-based/J
 trade/N
 group/N
 ,/,
@@ -12414,7 +12414,7 @@ Institute/N
 ./.
 ###/###
 ``/`
-Insitutional/N
+Insitutional/J
 investors/N
 ,/,
 on/I
@@ -12506,7 +12506,7 @@ on/I
 Monday/N
 ,/,
 the/D
-average/N
+average/J
 yield/V
 fell/V
 to/T
@@ -12523,7 +12523,7 @@ certificates/N
 of/I
 deposit/N
 on/I
-average/N
+average/J
 posted/V
 lower/J
 yields/N
@@ -12553,7 +12553,7 @@ The/D
 235/C
 general-purpose/N
 funds/N
-increased/V
+increased/J
 $/$
 2.53/C
 billion/C
@@ -12566,7 +12566,7 @@ while/I
 96/C
 broker-dealer/N
 funds/N
-increased/V
+increased/J
 $/$
 1.3/C
 billion/C
@@ -12638,7 +12638,7 @@ to/T
 the/D
 property/N
 sector/N
-rocked/V
+rocked/J
 the/D
 bank/N
 when/W
@@ -12659,7 +12659,7 @@ could/M
 n't/R
 wait/V
 any/D
-longer/J
+longer/R
 for/I
 prices/N
 to/T
@@ -13147,9 +13147,9 @@ the/D
 cash/N
 injection/N
 from/I
-Petronas/N
+Petronas/V
 will/M
-increase/N
+increase/V
 the/D
 bank/N
 's/P
@@ -13163,7 +13163,7 @@ after/I
 virtually/R
 being/V
 wiped/V
-out/I
+out/R
 by/I
 the/D
 new/J
@@ -13226,7 +13226,7 @@ says/V
 ./.
 ###/###
 No/D
-longer/R
+longer/J
 ./.
 ###/###
 When/W
@@ -13443,7 +13443,7 @@ from/I
 a/D
 shift/N
 in/I
-public/N
+public/J
 opinion/N
 ,/,
 which/W
@@ -13455,7 +13455,7 @@ on/I
 abortion/N
 over/I
 the/D
-past/N
+past/J
 decade/N
 ,/,
 than/I
@@ -13679,7 +13679,7 @@ goal/N
 is/V
 to/T
 sign/N
-up/I
+up/R
 50,000/C
 pro-choice/N
 voters/N
@@ -13728,7 +13728,7 @@ I/P
 could/M
 go/V
 work/V
-out/I
+out/R
 ,/,
 ''/'
 says/V
@@ -13881,7 +13881,7 @@ voters/N
 appear/V
 more/J
 at/I
-ease/N
+ease/V
 with/I
 Mr./N
 Florio/N
@@ -14039,7 +14039,7 @@ going/V
 to/T
 say/V
 an/D
-upscale/N
+upscale/J
 woman/N
 who/W
 can/M
@@ -14064,7 +14064,7 @@ is/V
 not/R
 in/I
 great/J
-shape/N
+shape/V
 financially/R
 does/V
 not/R
@@ -14317,7 +14317,7 @@ very/R
 much/J
 in/I
 the/D
-lead/N
+lead/J
 of/I
 the/D
 rightward/N
@@ -14435,7 +14435,7 @@ between/I
 his/P
 record/N
 and/C
-that/I
+that/D
 of/I
 the/D
 more/J
@@ -14955,8 +14955,8 @@ the/D
 lean/J
 ,/,
 mean/V
-Democratic/N
-fighting/N
+Democratic/J
+fighting/V
 machine/N
 of/I
 the/D
@@ -15027,7 +15027,7 @@ of/I
 younger/J
 reformers/N
 arising/V
-out/I
+out/R
 of/I
 old/J
 machines/N
@@ -15046,7 +15046,7 @@ of/I
 the/D
 county/N
 's/P
-past/N
+past/J
 corruption/N
 ./.
 ###/###
@@ -15302,7 +15302,7 @@ to/T
 decline/N
 at/I
 the/D
-retail/N
+retail/J
 level/N
 ,/,
 pulling/V
@@ -15400,8 +15400,8 @@ is/V
 certain/J
 to/T
 push/V
-up/I
-retail/N
+up/R
+retail/J
 energy/N
 prices/N
 in/I
@@ -15434,7 +15434,7 @@ reduce/V
 the/D
 prices/N
 of/I
-imported/V
+imported/J
 goods/N
 ./.
 ###/###
@@ -15586,7 +15586,7 @@ did/V
 ./.
 ###/###
 But/C
-retail/N
+retail/J
 energy/N
 prices/N
 declined/V
@@ -15606,7 +15606,7 @@ hold/V
 down/I
 increases/N
 in/I
-retail/N
+retail/J
 energy/N
 prices/N
 ,/,
@@ -15798,7 +15798,7 @@ was/V
 operating/N
 at/I
 fairly/R
-tight/N
+tight/M
 capacity/N
 ,/,
 so/R
@@ -15981,7 +15981,7 @@ only/R
 Apparel/N
 prices/N
 rocketed/V
-up/I
+up/R
 1.7/C
 %/N
 ,/,
@@ -16195,7 +16195,7 @@ centers/V
 and/C
 shopping/N
 villages/N
-so/I
+so/R
 visitors/N
 have/V
 more/J
@@ -16236,7 +16236,7 @@ efforts/N
 --/:
 unheard/V
 of/I
-only/J
+only/R
 a/D
 few/J
 years/N
@@ -16275,7 +16275,7 @@ only/R
 a/D
 year/N
 on/I
-average/N
+average/J
 ,/,
 compared/V
 with/I
@@ -16467,7 +16467,7 @@ great/J
 ,/,
 ''/'
 cries/N
-out/I
+out/R
 a/D
 tot/N
 ,/,
@@ -16478,7 +16478,7 @@ snowsuit/N
 as/I
 he/P
 plows/V
-down/I
+down/R
 a/D
 bunny/N
 slope/N
@@ -16724,7 +16724,7 @@ parents/N
 many/J
 slopes/N
 are/V
-building/N
+building/V
 nurseries/N
 ,/,
 expanding/V
@@ -16755,7 +16755,7 @@ town/N
 ;/:
 kids/N
 can/M
-ski/N
+ski/V
 through/I
 and/C
 pan/N
@@ -16797,7 +16797,7 @@ had/V
 to/T
 hire/V
 a/D
-sitter/N
+sitter/J
 or/C
 take/V
 turns/V
@@ -16842,7 +16842,7 @@ operates/V
 the/D
 Vail/N
 and/C
-nearby/J
+nearby/R
 Beaver/N
 Creek/N
 resorts/N
@@ -16875,7 +16875,7 @@ phone/N
 call/V
 ,/,
 ski/N
-buffs/N
+buffs/V
 can/M
 make/V
 hotel/N
@@ -16892,7 +16892,7 @@ ski/N
 equipment/N
 and/C
 sign/N
-up/I
+up/R
 for/I
 lessons/N
 ./.
@@ -16990,7 +16990,7 @@ by/I
 3.5/C
 million/C
 to/T
-about/I
+about/R
 21.7/C
 million/C
 in/I
@@ -17052,7 +17052,7 @@ rising/V
 ./.
 ###/###
 And/C
-most/J
+most/R
 vacationers/N
 still/R
 prefer/V
@@ -17272,7 +17272,7 @@ be/V
 able/J
 to/T
 get/V
-there/R
+there/E
 ./.
 ###/###
 Like/I
@@ -17317,7 +17317,7 @@ seem/V
 trivial/J
 to/T
 worry/V
-about/I
+about/R
 the/D
 World/N
 Series/N
@@ -17358,7 +17358,7 @@ so/R
 You/P
 might/M
 be/V
-interested/V
+interested/J
 to/T
 know/V
 that/I
@@ -17436,7 +17436,7 @@ seated/V
 several/J
 rows/N
 in/I
-front/N
+front/J
 of/I
 the/D
 open/J
@@ -17489,14 +17489,14 @@ bothered/V
 ###/###
 I/P
 'd/M
-slept/N
+slept/V
 through/I
 my/P
-only/J
+only/R
 previous/J
 brush/N
 with/I
-natural/N
+natural/J
 disaster/N
 ,/,
 a/D
@@ -17727,7 +17727,7 @@ out/R
 Here/R
 in/I
 the/D
-Global/N
+Global/J
 Village/N
 ,/,
 though/I
@@ -17744,7 +17744,7 @@ long/J
 Electrical/N
 power/N
 was/V
-out/I
+out/R
 in/I
 still-daylighted/J
 Candlestick/V
@@ -17957,7 +17957,7 @@ was/V
 commercial/J
 :/:
 Booths/N
-selling/N
+selling/V
 World/N
 Series/N
 commemorative/N
@@ -18057,7 +18057,7 @@ Westin/N
 ,/,
 power/N
 was/V
-out/I
+out/R
 ,/,
 some/D
 interior/J
@@ -18119,7 +18119,7 @@ had/V
 kindly/J
 ,/,
 set/V
-out/I
+out/R
 lighted/V
 candles/N
 in/I
@@ -18192,7 +18192,7 @@ seem/V
 unimportant/J
 ./.
 ###/###
-My/N
+My/P
 response/N
 was/V
 that/I
@@ -18222,7 +18222,7 @@ Series/N
 be/V
 played/V
 at/I
-all/D
+all/P
 ?/.
 ###/###
 The/D
@@ -18385,7 +18385,7 @@ will/M
 never/R
 again/R
 complain/V
-about/I
+about/R
 a/D
 rainout/N
 ./.
@@ -18496,7 +18496,7 @@ like/I
 securities/N
 firms/N
 in/I
-playing/N
+playing/V
 Wall/N
 Street/N
 's/P
@@ -18712,7 +18712,7 @@ UAL/N
 and/C
 NWA/N
 in/I
-play/N
+play/V
 as/I
 takeover/N
 candidates/N
@@ -18969,7 +18969,7 @@ large/J
 takeovers/N
 with/I
 the/D
-help/N
+help/V
 of/I
 junk/N
 bond/N
@@ -19044,7 +19044,7 @@ report/N
 that/I
 fees/N
 from/I
-syndicating/N
+syndicating/V
 loans/N
 to/T
 other/J
@@ -19110,7 +19110,7 @@ a/D
 credible/J
 offer/N
 of/I
-one-stop/N
+one-stop/V
 shopping/N
 for/I
 takeover/N
@@ -19378,7 +19378,7 @@ financing/N
 being/V
 played/V
 by/I
-Japanese/N
+Japanese/J
 banks/N
 ./.
 ###/###
@@ -19408,10 +19408,10 @@ Skinner/N
 But/C
 it/P
 was/V
-broad-scale/N
+broad-scale/J
 rejection/N
 by/I
-Japanese/N
+Japanese/J
 banks/N
 that/I
 helped/V
@@ -19602,7 +19602,7 @@ immediately/R
 be/V
 reached/V
 to/T
-comment/V
+comment/N
 ./.
 ###/###
 But/C
@@ -19640,7 +19640,7 @@ and/C
 he/P
 denied/V
 any/D
-wrongdoing/V
+wrongdoing/J
 ./.
 ###/###
 The/D
@@ -19809,7 +19809,7 @@ analysts/N
 '/P
 expectations/N
 of/I
-about/I
+about/R
 $/$
 1.16/C
 a/D
@@ -19847,7 +19847,7 @@ the/D
 earnings/N
 drop/V
 to/T
-lower/V
+lower/J
 volume/N
 related/V
 to/T
@@ -20248,7 +20248,7 @@ things/N
 are/V
 quiet/J
 -LRB-/-
-low/N
+low/J
 volatility/N
 -RRB-/-
 ,/,
@@ -20505,7 +20505,7 @@ through/I
 the/D
 market/N
 and/C
-increased/V
+increased/J
 the/D
 market/N
 's/P
@@ -20563,7 +20563,7 @@ is/V
 crucial/J
 that/I
 as/I
-much/J
+much/R
 information/N
 about/I
 transaction/N
@@ -20722,7 +20722,7 @@ is/V
 immediacy/N
 ,/,
 a/D
-very/J
+very/R
 valuable/J
 service/N
 ./.
@@ -20819,7 +20819,7 @@ market/N
 as/I
 a/D
 whole/J
-remains/N
+remains/V
 in/I
 the/D
 same/J
@@ -20928,7 +20928,7 @@ able/J
 to/T
 see/V
 the/D
-entire/N
+entire/V
 supply-demand/N
 curve/N
 -LRB-/-
@@ -21012,7 +21012,7 @@ achieved/V
 almost/R
 15/C
 years/N
-ago/I
+ago/R
 when/W
 it/P
 passed/V
@@ -21067,7 +21067,7 @@ earthquake/N
 ''/'
 protection/N
 by/I
-making/N
+making/V
 certain/J
 that/I
 our/P
@@ -21123,7 +21123,7 @@ is/V
 The/D
 economy/N
 's/P
-stutter/N
+stutter/J
 steps/N
 leave/V
 investors/N
@@ -21132,13 +21132,13 @@ whether/I
 things/N
 are/V
 slowing/V
-down/I
+down/R
 or/C
 speeding/V
-up/I
+up/R
 ./.
 ###/###
-So/I
+So/R
 often/R
 are/V
 government/N
@@ -21196,7 +21196,7 @@ experienced/V
 --/:
 what/W
 it/P
-'s/V
+'s/P
 like/V
 to/T
 invest/V
@@ -21249,7 +21249,7 @@ agree/V
 on/I
 steps/N
 that/I
-can/N
+can/M
 be/V
 taken/V
 to/T
@@ -21287,7 +21287,7 @@ big/J
 companies/N
 in/I
 ``/`
-defensive/N
+defensive/J
 ''/'
 industries/N
 ./.
@@ -21314,12 +21314,12 @@ bonds/N
 ./.
 ###/###
 It/P
-'s/V
+'s/P
 tempting/V
 to/T
 think/V
 these/D
-defensive/N
+defensive/J
 steps/N
 can/M
 be/V
@@ -21334,7 +21334,7 @@ hand/N
 ./.
 ###/###
 But/C
-that/I
+that/D
 may/M
 not/R
 be/V
@@ -21459,7 +21459,7 @@ falling/V
 interest/N
 rates/N
 force/N
-up/I
+up/R
 the/D
 price/N
 of/I
@@ -21503,7 +21503,7 @@ ca/M
 n't/R
 rise/V
 too/R
-much/J
+much/R
 ,/,
 because/I
 everyone/N
@@ -21597,7 +21597,7 @@ bonds/N
 Also/R
 ,/,
 he/P
-notes/N
+notes/V
 ,/,
 ``/`
 most/J
@@ -21609,7 +21609,7 @@ callable/J
 ''/'
 ###/###
 That/D
-means/N
+means/V
 that/I
 a/D
 corporation/N
@@ -21707,7 +21707,7 @@ be/V
 the/D
 worst/J
 of/I
-all/D
+all/P
 ./.
 ###/###
 It/P
@@ -21719,7 +21719,7 @@ necessity/N
 ''/'
 to/T
 get/V
-out/I
+out/R
 of/I
 junk/N
 bonds/N
@@ -21885,17 +21885,17 @@ in/I
 a/D
 recession/N
 or/C
-about/I
+about/R
 to/T
 go/V
 into/I
-one/C
+one/N
 ./.
 ''/'
 ###/###
 What/W
 's/P
-more/J
+more/R
 ,/,
 he/P
 thinks/N
@@ -21915,7 +21915,7 @@ downturn/N
 comes/V
 ,/,
 it/P
-'s/V
+'s/P
 going/V
 to/T
 be/V
@@ -22002,7 +22002,7 @@ cash/N
 by/I
 which/W
 he/P
-means/N
+means/V
 such/J
 so-called/J
 cash/N
@@ -22076,7 +22076,7 @@ economy/N
 tends/V
 to/T
 veer/V
-off/I
+off/R
 either/D
 into/I
 damaging/V
@@ -22126,7 +22126,7 @@ is/V
 n't/R
 something/N
 that/I
-can/N
+can/M
 be/V
 achieved/V
 once/R
@@ -22284,7 +22284,7 @@ appreciation/N
 ./.
 ###/###
 That/D
-'s/V
+'s/P
 well/R
 above/I
 what/W
@@ -22401,7 +22401,7 @@ who/W
 jump/V
 in/I
 and/C
-out/I
+out/R
 of/I
 the/D
 stock/N
@@ -22426,7 +22426,7 @@ strategy/N
 Frequent/J
 trading/N
 runs/V
-up/I
+up/R
 high/J
 commission/N
 costs/N
@@ -22462,7 +22462,7 @@ are/V
 able/J
 to/T
 sit/V
-tight/N
+tight/J
 when/W
 they/P
 are/V
@@ -22470,7 +22470,7 @@ convinced/J
 a/D
 recession/N
 is/V
-coming/V
+coming/J
 ./.
 ###/###
 After/I
@@ -22522,7 +22522,7 @@ the/D
 decrease/V
 began/V
 an/D
-average/N
+average/J
 of/I
 six/C
 months/N
@@ -22904,7 +22904,7 @@ choosing/V
 stocks/N
 in/I
 ``/`
-defensive/N
+defensive/J
 ''/'
 industries/N
 ./.
@@ -22948,7 +22948,7 @@ III/N
 editor/N
 of/I
 Turnaround/N
-Letter/N
+Letter/J
 in/I
 Boston/N
 ,/,
@@ -23104,7 +23104,7 @@ $/$
 220/C
 million/C
 senior/J
-subordinated/V
+subordinated/J
 debenture/N
 offering/N
 by/I
@@ -23229,7 +23229,7 @@ high-risk/J
 corporate/J
 bonds/N
 have/V
-either/D
+either/R
 been/V
 scaled/V
 back/R
@@ -23336,7 +23336,7 @@ and/C
 Chicago/N
 &/C
 North/N
-Western/N
+Western/J
 -RCB-/-
 is/V
 no/D
@@ -23396,7 +23396,7 @@ the/D
 Chicago/N
 &/C
 North/N
-Western/N
+Western/J
 offering/N
 was/V
 restructured/V
@@ -23494,7 +23494,7 @@ the/D
 Chicago/N
 &/C
 North/N
-Western/N
+Western/J
 issue/N
 to/T
 be/V
@@ -23816,7 +23816,7 @@ Treasury/N
 securities/N
 ended/V
 narrowly/R
-mixed/V
+mixed/J
 ,/,
 with/I
 two-year/J
@@ -23892,7 +23892,7 @@ hovering/V
 around/I
 during/I
 the/D
-past/N
+past/J
 week/N
 ./.
 ###/###
@@ -24080,7 +24080,7 @@ yesterday/N
 ./.
 ###/###
 The/D
-average/N
+average/J
 yield/N
 on/I
 the/D
@@ -24200,7 +24200,7 @@ junk/N
 bond/N
 issues/N
 on/I
-average/N
+average/J
 were/V
 up/R
 by/I
@@ -24330,7 +24330,7 @@ major/J
 brokers/N
 ./.
 ###/###
-There/R
+There/E
 was/V
 speculation/N
 that/I
@@ -24427,7 +24427,7 @@ about/I
 7.32/C
 %/N
 ,/,
-down/I
+down/R
 0.03/C
 percentage/N
 point/N
@@ -24538,7 +24538,7 @@ that/I
 purpose/N
 is/V
 n't/R
-anticipated/V
+anticipated/J
 ./.
 ###/###
 Meanwhile/R
@@ -24672,7 +24672,7 @@ Mae/N
 securities/N
 were/V
 down/R
-about/I
+about/R
 at/I
 109/C
 ./.
@@ -24755,7 +24755,7 @@ ended/V
 at/I
 98/C
 ,/,
-up/I
+up/R
 9/C
 ,/,
 9/C
@@ -24828,7 +24828,7 @@ favorable/J
 Two/C
 new/J
 Remics/N
-totaling/V
+totaling/N
 $/$
 900/C
 million/C
@@ -24909,7 +24909,7 @@ bond/N
 of/I
 1998/C
 ended/V
-off/I
+off/R
 0.03/C
 at/I
 95.72/C
@@ -24927,7 +24927,7 @@ Germany/N
 the/D
 7/C
 %/N
-benchmark/N
+benchmark/J
 issue/N
 due/J
 October/N
