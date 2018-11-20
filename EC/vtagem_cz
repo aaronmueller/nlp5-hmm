@@ -1,0 +1,3 @@
+#!/bin/bash
+
+python3 EC/runEM_cz.py $*

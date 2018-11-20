@@ -12,11 +12,12 @@ import pdb
 from collections import defaultdict
 from collections import Counter
 import math
+import codecs
 
 class HMM:
     def __init__(self, train_file, raw_file, test_file):
 
-        self.lamda = 0.05
+        self.lamda = 1
 
         self.states = set()
         self.observations = set()
@@ -50,14 +51,23 @@ class HMM:
         self.mu_t = {}
         self.back_t = {}
 
-        with open(train_file, 'r', encoding='utf-8', errors='replace') as f:
-            self.trainlines = f.readlines()
+        #with open(train_file, 'r') as f:
+        #    self.trainlines = f.readlines()
 
-        with open(raw_file, 'r', encoding='utf=8', errors='replace') as f:
-            self.rawlines = f.readlines()
+        #with open(raw_file, 'r') as f:
+        #    self.rawlines = f.readlines()
 
-        with open(test_file, 'r', encoding='utf-8', errors='replace') as f:
-            self.testlines = f.readlines()
+        #with open(test_file, 'r') as f:
+        #    self.testlines = f.readlines()
+
+        trainf = codecs.open(train_file, 'r', encoding='ISO-8859-1')
+        self.trainlines = trainf.readlines()
+
+        rawf = codecs.open(raw_file, 'r', encoding='ISO-8859-1')
+        self.rawlines = rawf.readlines()
+
+        testf = codecs.open(test_file, 'r', encoding='ISO-8859-1')
+        self.testlines = testf.readlines()
 
 
     # fill variables declared in __init__
@@ -257,6 +267,10 @@ class HMM:
             self.emission_probs[tag]['<OOV>'] = \
                 float(self.state_counts[tag]) / tag_total
 
+        # Pruning top tags
+        sorted_tags = sorted(self.state_counts.items(), key=lambda x: x[1], reverse=True)
+        self.pruned_tags = [t[0] for t in sorted_tags][:8]
+
         #print(self.transition_probs)
         #print(self.emission_probs)
 
@@ -280,7 +294,6 @@ class HMM:
         for i in range(len(self.raw_words)):
             sanity_check[i] = 0
             for t in self.states:
-                if t!="###":
                     sanity_check[i] += math.exp(self.alpha_t[t][i])\
                     * math.exp(self.beta_t[t][i])
         for i in range(1, len(sanity_check)-1):
@@ -312,7 +325,16 @@ class HMM:
         #    f.write("\n".join(lines))
 
 
+    def get_tags(self, w_i):
 
+        if w_i == "###":
+            return {'###'}
+        elif w_i == "<OOV>":
+            return self.pruned_tags
+        elif w_i not in self.tag_dict:
+            return self.pruned_tags
+        else:
+            return self.tag_dict[w_i]
 
     def calc_state_probs(self, i, w_i, prev_word, direction=None):
         # if forward, state_probs = self.alpha_t
@@ -336,6 +358,10 @@ class HMM:
         if prev_word not in tag_d and prev_word != "###":
             prev_word = "<OOV>"
 
+        tags = self.get_tags(w_i)
+        prev_tags = self.get_tags(prev_word)
+
+
         # TODO: handle EOS
         if w_i == "###":
             # SOS
@@ -346,19 +372,19 @@ class HMM:
                 return prev_word
             
             # EOS
-            else:
-                tags = {'###'}
-                prev_tags = tag_d[prev_word]
+        #    else:
+        #        tags = {'###'}
+        #        prev_tags = tag_d[prev_word]
            
         # First word
-        elif prev_word == '###':
+        #elif prev_word == '###':
 
-            tags = tag_d[w_i]
-            prev_tags = {'###'} # ### tags ###
+        #    tags = tag_d[w_i]
+        #    prev_tags = {'###'} # ### tags ###
 
-        else:
-            tags = tag_d[w_i]
-            prev_tags = tag_d[prev_word]
+       # else:
+       #     tags = tag_d[w_i]
+       #     prev_tags = tag_d[prev_word]
         
         for t_i in tags:
             
@@ -517,7 +543,7 @@ class HMM:
         else:
             novel_accuracy = 0
 
-        print("# Wrongly tagged:", Counter(wrong_tags))
+        # print("# Wrongly tagged:", Counter(wrong_tags))
         return (accuracy, known_accuracy, seen_accuracy, novel_accuracy)
 
 
@@ -564,6 +590,8 @@ class HMM:
 
         print("Model perplexity per tagged test word: {0:.3f}".format(\
                 math.exp(-crossentropy/(len(self.test_words)-1))))
+
+
         print("Tagging accuracy (Viterbi decoding): {0:.2f}% (known: {1:.2f}% seen: {2:.2f}% novel: {3:.2f}%)".format(\
                 viterbi_eval[0]*100, viterbi_eval[1]*100, viterbi_eval[2]*100, viterbi_eval[3]*100))
         print("# Tagging accuracy (posterior decoding): {0:.2f}% (known: {1:.2f}% seen: {2:.2f}% novel: {3:.2f}%)\n#".format(\
@@ -614,6 +642,7 @@ class HMM:
             if prev_word not in self.observations:
                 prev_word = "<OOV>"
 
+            # Fix this later
             #if i > 0:
             #    crossentropy += math.log(self.transition_probs[self.true_tags[i-1]][self.true_tags[i]]) \
             #        + math.log(self.emission_probs[self.true_tags[i]][w_i])
@@ -640,7 +669,6 @@ class HMM:
 
         predicted_tags.append('###')
         tags = predicted_tags[::-1]
-        
         return tags, crossentropy
 
 
